@@ -1,0 +1,23 @@
+from .utils import KeyHandler
+
+
+class Expire(object):
+    __metaclass__ = KeyHandler
+    EXPIRE = None
+
+    @classmethod
+    def expire(cls, key, seconds=None):
+        if seconds is None:
+            try:
+                seconds = int(cls.EXPIRE)
+            except TypeError:
+                raise ValueError(seconds)
+        return cls.connect().expire(key, seconds)
+
+    @classmethod
+    def ttl(cls, key):
+        return cls.connect().ttl(key)
+
+    @classmethod
+    def persist(cls, key):
+        return cls.connect().persist(key)
