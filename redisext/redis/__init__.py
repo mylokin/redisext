@@ -59,7 +59,13 @@ class IClient(object):
         return self._redis.decr(key, amount)
 
     def zrangebyscore(self, key, min_score, max_score, start=0, num=1):
-        return self._redis.zrangebyscore(key, min_score, max_score, start=start, num=num)
+        return self._redis.zrangebyscore(
+            key,
+            min_score,
+            max_score,
+            start=start,
+            num=num,
+        )
 
     def zrem(self, key, item):
         return self._redis.zrem(key, item)

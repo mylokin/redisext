@@ -9,7 +9,10 @@ class HashMap(object):
     @classmethod
     def get(cls, key, hash_key):
         value = cls.connect().hget(key, hash_key)
-        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
 
     @classmethod
     def put(cls, key, hash_key, value):
@@ -28,7 +31,10 @@ class Map(object):
     @classmethod
     def get(cls, key):
         value = cls.connect().get(key)
-        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
 
     @classmethod
     def put(cls, key, value):
@@ -39,12 +45,18 @@ class Map(object):
     @classmethod
     def incr(cls, key, amount=1):
         value = cls.connect().incr(key, amount)
-        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
 
     @classmethod
     def decr(cls, key, amount=1):
         value = cls.connect().decr(key, amount)
-        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
 
     @classmethod
     def remove(cls, key):

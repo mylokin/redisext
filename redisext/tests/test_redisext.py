@@ -170,7 +170,8 @@ class TestRedisext(TestCase):
         self.assertEquals(TestSortedSet.length(0, 3), 4)
         element, score = data.iteritems().next()
         self.assertTrue(TestSortedSet.contains(element))
-        self.assertEqual(TestSortedSet.members(), sorted(data.keys(), reverse=True))
+        expected_members = sorted(data.keys(), reverse=True)
+        self.assertEqual(TestSortedSet.members(), expected_members)
         TestSortedSet.truncate(2)
         truncated = sorted(data.keys(), reverse=True)[:-2]
         self.assertEqual(TestSortedSet.members(), truncated)

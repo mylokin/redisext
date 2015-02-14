@@ -9,7 +9,10 @@ class Pool(object):
     @classmethod
     def pop(cls, key):
         item = cls.connect().spop(key)
-        return cls.decode(item) if item and issubclass(cls, redisext.serializer.ISerializable) else item
+        if item and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(item)
+        else:
+            return item
 
     @classmethod
     def push(cls, key, item):

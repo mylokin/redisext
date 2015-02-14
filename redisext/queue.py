@@ -9,7 +9,10 @@ class Queue(object):
     @classmethod
     def pop(cls, key):
         item = cls.connect().rpop(key)
-        return cls.decode(item) if item and issubclass(cls, redisext.serializer.ISerializable) else item
+        if item and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(item)
+        else:
+            return item
 
     @classmethod
     def push(cls, key, item):
@@ -28,7 +31,10 @@ class PriorityQueue(object):
         item = redis.zrangebyscore(key, '-inf', '+inf', num=1)
         item = item[0] if item else None
         redis.zrem(key, item)
-        return cls.decode(item) if item and issubclass(cls, redisext.serializer.ISerializable) else item
+        if item and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(item)
+        else:
+            return item
 
     @classmethod
     def push(cls, key, item, priority):
