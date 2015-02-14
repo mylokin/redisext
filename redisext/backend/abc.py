@@ -85,7 +85,7 @@ class IClient(object):
 
 class IRedis(object):
     CLIENT = IClient
-    CONNECTION = {}
+    CONNECTION = None
 
     @classmethod
     def connect(cls):

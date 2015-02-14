@@ -1,0 +1,11 @@
+import redisext.backend.abc
+import redis
+
+
+class Client(redisext.backend.abc.IClient):
+    def __init__(self, host, port, db):
+        self._redis = redis.StrictRedis(host, port, db)
+
+
+class Redis(redisext.backend.abc.IRedis):
+    CLIENT = Client
