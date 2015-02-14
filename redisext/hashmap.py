@@ -1,19 +1,19 @@
-from .serializer import ISerializable
-from .utils import KeyHandler
+import redisext.serializer
+import redisext.utils
 
 
 class HashMap(object):
-    __metaclass__ = KeyHandler
+    __metaclass__ = redisext.utils.KeyHandler
     KEY = None
 
     @classmethod
     def get(cls, key, hash_key):
         value = cls.connect().hget(key, hash_key)
-        return cls.decode(value) if value and issubclass(cls, ISerializable) else value
+        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
 
     @classmethod
     def put(cls, key, hash_key, value):
-        if issubclass(cls, ISerializable):
+        if issubclass(cls, redisext.serializer.ISerializable):
             value = cls.encode(value)
         return cls.connect().hset(key, hash_key, value)
 
@@ -23,28 +23,28 @@ class HashMap(object):
 
 
 class Map(object):
-    __metaclass__ = KeyHandler
+    __metaclass__ = redisext.utils.KeyHandler
 
     @classmethod
     def get(cls, key):
         value = cls.connect().get(key)
-        return cls.decode(value) if value and issubclass(cls, ISerializable) else value
+        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
 
     @classmethod
     def put(cls, key, value):
-        if issubclass(cls, ISerializable):
+        if issubclass(cls, redisext.serializer.ISerializable):
             value = cls.encode(value)
         return cls.connect().set(key, value)
 
     @classmethod
     def incr(cls, key, amount=1):
         value = cls.connect().incr(key, amount)
-        return cls.decode(value) if value and issubclass(cls, ISerializable) else value
+        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
 
     @classmethod
     def decr(cls, key, amount=1):
         value = cls.connect().decr(key, amount)
-        return cls.decode(value) if value and issubclass(cls, ISerializable) else value
+        return cls.decode(value) if value and issubclass(cls, redisext.serializer.ISerializable) else value
 
     @classmethod
     def remove(cls, key):

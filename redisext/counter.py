@@ -1,8 +1,8 @@
-from .utils import KeyHandler
+import redisext.utils
 
 
 class Counter(object):
-    __metaclass__ = KeyHandler
+    __metaclass__ = redisext.utils.KeyHandler
     KEY = None
 
     @classmethod
