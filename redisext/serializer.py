@@ -4,45 +4,45 @@ import json
 import cPickle as pickle
 
 
-class ISerializable(object):
+class ISerializer(object):
     pass
 
 
-class JSON(ISerializable):
-    @classmethod
-    def encode(cls, item):
+class JSON(ISerializer):
+    @staticmethod
+    def encode(item):
         return json.dumps(item)
 
-    @classmethod
-    def decode(cls, item):
+    @staticmethod
+    def decode(item):
         return json.loads(item)
 
 
-class String(ISerializable):
-    @classmethod
-    def encode(cls, item):
+class String(ISerializer):
+    @staticmethod
+    def encode(item):
         return str(item)
 
-    @classmethod
-    def decode(cls, item):
+    @staticmethod
+    def decode(item):
         return item
 
 
-class Numeric(ISerializable):
-    @classmethod
-    def encode(cls, item):
+class Numeric(ISerializer):
+    @staticmethod
+    def encode(item):
         return int(item)
 
-    @classmethod
-    def decode(cls, item):
+    @staticmethod
+    def decode(item):
         return int(item)
 
 
-class Pickle(ISerializable):
-    @classmethod
-    def encode(cls, item):
+class Pickle(ISerializer):
+    @staticmethod
+    def encode(item):
         return pickle.dumps(item)
 
-    @classmethod
-    def decode(cls, item):
+    @staticmethod
+    def decode(item):
         return pickle.loads(item)

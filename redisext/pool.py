@@ -11,14 +11,14 @@ class Pool(object):
     @classmethod
     def pop(cls, key):
         item = cls.connect().spop(key)
-        if item and issubclass(cls, redisext.serializer.ISerializable):
+        if item and issubclass(cls, redisext.serializer.ISerializer):
             return cls.decode(item)
         else:
             return item
 
     @classmethod
     def push(cls, key, item):
-        if issubclass(cls, redisext.serializer.ISerializable):
+        if issubclass(cls, redisext.serializer.ISerializer):
             item = cls.encode(item)
         return cls.connect().sadd(key, item)
 
@@ -29,7 +29,7 @@ class SortedSet(object):
 
     @classmethod
     def add(cls, key, element, score):
-        if issubclass(cls, redisext.serializer.ISerializable):
+        if issubclass(cls, redisext.serializer.ISerializer):
             element = cls.encode(element)
         cls.connect().zadd(key, score, element)
 
@@ -40,14 +40,14 @@ class SortedSet(object):
     @classmethod
     def members(cls, key):
         elements = cls.connect().zrevrange(key, 0, -1)
-        if elements and issubclass(cls, redisext.serializer.ISerializable):
+        if elements and issubclass(cls, redisext.serializer.ISerializer):
             return map(cls.decode, elements)
         else:
             return elements
 
     @classmethod
     def contains(cls, key, element):
-        if issubclass(cls, redisext.serializer.ISerializable):
+        if issubclass(cls, redisext.serializer.ISerializer):
             element = cls.encode(element)
         return cls.connect().zscore(key, element) is not None
 

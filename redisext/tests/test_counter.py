@@ -5,10 +5,9 @@ import redisext.serializer
 import redisext.tests.fixture as fixture
 
 
-class Counter(fixture.Redis,
-              redisext.counter.Counter,
-              redisext.serializer.Numeric):
+class Counter(fixture.Redis, redisext.counter.Counter):
     KEY = 'key'
+    SERIALIZER = redisext.serializer.Numeric
 
 
 class CounterTestCase(fixture.TestCase):
@@ -23,3 +22,7 @@ class CounterTestCase(fixture.TestCase):
 
     def test_empty_counter(self):
         self.assertIsNone(Counter.get())
+
+if __name__ == '__main__':
+    import unittest
+    unittest.main()

@@ -23,3 +23,19 @@ class KeyHandler(type):
             elif inspect.ismethoddescriptor(method):
                 attrs[attr] = classmethod(cls.key(method.__func__))
         return super(KeyHandler, cls).__new__(cls, name, bases, attrs)
+
+
+def decode(cls, value):
+    serializer = getattr(cls, 'SERIALIZER', None)
+    if value and serializer:
+        return serializer.decode.__func__(value)
+    else:
+        return value
+
+
+def encode(cls, value):
+    serializer = getattr(cls, 'SERIALIZER', None)
+    if value and serializer:
+        return serializer.encode.__func__(value)
+    else:
+        return value

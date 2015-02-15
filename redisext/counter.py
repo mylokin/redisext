@@ -10,15 +10,9 @@ class Counter(object):
     @classmethod
     def increment(cls, key):
         value = cls.connect().incr(key)
-        if value and issubclass(cls, redisext.serializer.ISerializable):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
 
     @classmethod
     def get(cls, key):
         value = cls.connect().get(key)
-        if value and issubclass(cls, redisext.serializer.ISerializable):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
