@@ -11,7 +11,7 @@ class Connection(redisext.backend.redis.Connection):
 
 class TestCase(unittest.TestCase):
     def tearDown(self):
-        Redis.connect().flushdb()
+        Connection.connect_to_master().flushdb()
 
 
 class KeyTestCase(TestCase):

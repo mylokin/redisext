@@ -6,7 +6,7 @@ import redisext.serializer
 import redisext.tests.fixture as fixture
 
 
-class ExpireCounter(fixture.Redis,
+class ExpireCounter(fixture.Connection,
                     redisext.counter.Counter,
                     redisext.key.Expire,
                     redisext.serializer.Numeric):
@@ -27,7 +27,7 @@ class ExpireCounterTestCase(fixture.TestCase):
         self.assertEqual(ExpireCounter.ttl(self.key), -1)
 
 
-class UnspecifiedExpireCounter(fixture.Redis,
+class UnspecifiedExpireCounter(fixture.Connection,
                                redisext.counter.Counter,
                                redisext.key.Expire,
                                redisext.serializer.Numeric):

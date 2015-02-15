@@ -5,7 +5,7 @@ import redisext.serializer
 import redisext.tests.fixture as fixture
 
 
-class Queue(fixture.Redis, redisext.queue.Queue):
+class Queue(fixture.Connection, redisext.queue.Queue):
     KEY = 'queue'
     SERIALIZER = redisext.serializer.Pickle
 
@@ -27,7 +27,7 @@ class QueueTestCase(fixture.TestCase):
         self.assertIsNone(Queue.pop())
 
 
-class PriorityQueue(fixture.Redis, redisext.queue.PriorityQueue):
+class PriorityQueue(fixture.Connection, redisext.queue.PriorityQueue):
     KEY = 'priority_queue'
     SERIALIZER = redisext.serializer.Pickle
 
@@ -50,7 +50,7 @@ class PriorityQueueTestCase(fixture.TestCase):
         self.assertEqual(PriorityQueue.pop(), 'a')
 
 
-class KeyPickleQueue(fixture.Redis, redisext.queue.Queue):
+class KeyPickleQueue(fixture.Connection, redisext.queue.Queue):
     SERIALIZER = redisext.serializer.Pickle
 
 

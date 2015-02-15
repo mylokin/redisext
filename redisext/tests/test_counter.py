@@ -5,7 +5,7 @@ import redisext.serializer
 import redisext.tests.fixture as fixture
 
 
-class Counter(fixture.Redis, redisext.counter.Counter):
+class Counter(fixture.Connection, redisext.counter.Counter):
     KEY = 'key'
     SERIALIZER = redisext.serializer.Numeric
 
