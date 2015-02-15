@@ -33,3 +33,23 @@ class HashMapTestCase(fixture.TestCase):
 
     def test_empty_hashmap(self):
         self.assertIsNone(HashMap.get('non-esixsted'))
+
+
+class Map(fixture.Redis,
+          redisext.hashmap.Map,
+          redisext.serializer.Pickle):
+    pass
+
+
+class MapTestCase(fixture.TestCase):
+    def test_multiple_map_set(self):
+        data = {'map_key1': 'value1', 'map_key2': 'value2'}
+        for key, value in data.iteritems():
+            Map.put(key, value)
+            self.assertEqual(Map.get(key), value)
+
+    def test_empty_map(self):
+        key, value = 'key1', 'value1'
+        Map.put(key, value)
+        Map.remove(key)
+        self.assertIsNone(Map.get(key))

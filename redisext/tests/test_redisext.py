@@ -36,10 +36,6 @@ class TestRedis(Redis):
     SETTINGS = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
-class TestMap(TestRedis, Map, Pickle):
-    pass
-
-
 class TestSortedSet(TestRedis, SortedSet, Pickle):
     KEY = 'sortedset'
 
@@ -61,16 +57,6 @@ class TestRedisext(unittest.TestCase):
         TestSortedSet.truncate(2)
         truncated = sorted(data.keys(), reverse=True)[:-2]
         self.assertEqual(TestSortedSet.members(), truncated)
-
-    def test_map(self):
-        data = {'map_key1': 'value1', 'map_key2': 'value2'}
-        for key, value in data.iteritems():
-            TestMap.put(key, value)
-            self.assertEqual(TestMap.get(key), value)
-
-        TestMap.put(key, value)
-        TestMap.remove(key)
-        self.assertIsNone(TestMap.get(key))
 
 
 if __name__ == '__main__':
