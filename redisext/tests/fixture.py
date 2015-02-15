@@ -12,3 +12,12 @@ class Redis(redisext.backend.redis.Redis):
 class TestCase(unittest.TestCase):
     def tearDown(self):
         Redis.connect().flushdb()
+
+
+class KeyTestCase(TestCase):
+    STORAGE = None
+
+    def test_keys(self):
+        key, data = 'key', [{'key': 'value'}, 1, 'string', (1, 2, 3)]
+        self.STORAGE.push(key, data)
+        self.assertEqual(self.STORAGE.pop(key), data)

@@ -91,3 +91,13 @@ class PickleStackTestCase(StackTestCase):
 
     def test_empty_for_pickle_stack(self):
         self.assertIsNone(PickleStack.pop())
+
+
+class KeyPickleStack(fixture.Redis,
+            redisext.stack.Stack,
+            redisext.serializer.Pickle):
+    pass
+
+
+class KeyStackTestCase(fixture.KeyTestCase):
+    STORAGE = KeyPickleStack
