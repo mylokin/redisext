@@ -9,10 +9,10 @@ class Counter(object):
 
     @classmethod
     def increment(cls, key):
-        value = cls.connect().incr(key)
+        value = cls.connect_to_master().incr(key)
         return redisext.utils.decode(cls, value)
 
     @classmethod
     def get(cls, key):
-        value = cls.connect().get(key)
+        value = cls.connect_to_slave().get(key)
         return redisext.utils.decode(cls, value)
