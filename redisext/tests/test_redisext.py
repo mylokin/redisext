@@ -36,26 +36,6 @@ class TestRedis(Redis):
     SETTINGS = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
-class TestRawStack(TestRedis, Stack):
-    KEY = 'raw_stack'
-
-
-class TestJSONStack(TestRedis, Stack, JSON):
-    KEY = 'json_stack'
-
-
-class TestStringStack(TestRedis, Stack, String):
-    KEY = 'string_stack'
-
-
-class TestDecimalStack(TestRedis, Stack, Numeric):
-    KEY = 'decimal_stack'
-
-
-class TestStack(TestRedis, Stack, Pickle):
-    KEY = 'stack'
-
-
 class TestPool(TestRedis, Pool, Pickle):
     KEY = 'pool'
 
@@ -113,32 +93,6 @@ class TestRedisext(unittest.TestCase):
     def tearDown(self):
         TestRedis.connect().flushdb()
 
-    def __stack(self, Stack, data):
-        for item in data:
-            Stack.push(item)
-        for item in reversed(data):
-            self.assertEqual(item, Stack.pop())
-
-    def test_rawstack(self):
-        data = ['1', '2', '3']
-        self.__stack(TestRawStack, data)
-
-    def test_decimalstack(self):
-        data = [1, 2, 3]
-        self.__stack(TestDecimalStack, data)
-
-    def test_jsonstack(self):
-        data = [{'a': 1, 'b': 2}, {'c': 3, 'd': 'e'}]
-        self.__stack(TestJSONStack, data)
-
-    def test_stringstack(self):
-        data = ['abc', 'qwe']
-        self.__stack(TestStringStack, data)
-
-    def test_stack(self):
-        data = [1, 'a', [1, 2, 3], (1, 2, 3), {'a': 'b'}]
-        self.__stack(TestStack, data)
-
     def test_pool(self):
         data = [1, 2, 3, 4, {'a': 5}]
         for item in data:
@@ -186,11 +140,6 @@ class TestRedisext(unittest.TestCase):
         self.assertIsNone(TestPool.pop())
         self.assertIsNone(TestQueue.pop())
         self.assertIsNone(TestPriorityQueue.pop())
-        self.assertIsNone(TestStack.pop())
-        self.assertIsNone(TestRawStack.pop())
-        self.assertIsNone(TestJSONStack.pop())
-        self.assertIsNone(TestStringStack.pop())
-        self.assertIsNone(TestDecimalStack.pop())
         self.assertIsNone(TestHashMap.get('non-esixsted'))
 
     def test_multi(self):
