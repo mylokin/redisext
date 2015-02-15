@@ -9,5 +9,5 @@ class Client(redisext.backend.abc.IClient):
         self._redis = rm.rmredis.RmRedis.get_instance(database, role)
 
 
-class Redis(redisext.backend.abc.IConnection):
+class Connection(redisext.backend.abc.IConnection):
     CLIENT = Client

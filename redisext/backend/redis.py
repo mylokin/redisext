@@ -9,5 +9,5 @@ class Client(redisext.backend.abc.IClient):
         self._redis = redis.StrictRedis(host, port, db)
 
 
-class Redis(redisext.backend.abc.IConnection):
+class Connection(redisext.backend.abc.IConnection):
     CLIENT = Client
