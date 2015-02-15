@@ -5,7 +5,7 @@ import unittest
 import redisext.backend.redis
 
 
-class Redis(redisext.backend.redis.Redis):
+class Connection(redisext.backend.redis.Connection):
     MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
