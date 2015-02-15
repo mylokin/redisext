@@ -91,4 +91,3 @@ class PickleStackTestCase(StackTestCase):
 
     def test_empty_for_pickle_stack(self):
         self.assertIsNone(PickleStack.pop())
-
