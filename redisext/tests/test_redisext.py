@@ -36,14 +36,6 @@ class TestRedis(Redis):
     SETTINGS = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
-class TestQueue(TestRedis, Queue, Pickle):
-    KEY = 'queue'
-
-
-class TestPriorityQueue(TestRedis, PriorityQueue, Pickle):
-    KEY = 'priority'
-
-
 class TestHashMap(TestRedis, HashMap, Pickle):
     KEY = 'hashmap'
 
@@ -89,21 +81,6 @@ class TestRedisext(unittest.TestCase):
     def tearDown(self):
         TestRedis.connect().flushdb()
 
-    def test_queue(self):
-        data = [1, 2, 3]
-        for item in data:
-            TestQueue.push(item)
-        for item in data:
-            self.assertEqual(TestQueue.pop(), item)
-
-    def test_priorityqueue(self):
-        data = [('a', 1), ('b', 3), ('c', 3)]
-        for item in data:
-            TestPriorityQueue.push(*item)
-        self.assertEqual(TestPriorityQueue.pop(), 'a')
-        self.assertIn(TestPriorityQueue.pop(), ['b', 'c'])
-        self.assertIn(TestPriorityQueue.pop(), ['b', 'c'])
-
     def test_hashmap(self):
         data = {'key1': 'value1', 'key2': 'value2'}
         for key, value in data.iteritems():
@@ -126,8 +103,6 @@ class TestRedisext(unittest.TestCase):
         self.assertEqual(TestSortedSet.members(), truncated)
 
     def test_empty(self):
-        self.assertIsNone(TestQueue.pop())
-        self.assertIsNone(TestPriorityQueue.pop())
         self.assertIsNone(TestHashMap.get('non-esixsted'))
 
     def test_multi(self):
