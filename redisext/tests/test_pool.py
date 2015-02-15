@@ -26,14 +26,43 @@ class PoolTestCase(fixture.TestCase):
             self.assertIn(Pool.pop(), self.data)
 
 
+class SortedSet(fixture.Redis,
+                redisext.pool.SortedSet,
+                redisext.serializer.Pickle):
+    KEY = 'key'
+
+
+class SortedSetTestCase(fixture.TestCase):
+    def setUp(self):
+        self.data = {'string1': 0, 'string2': 1, 'string3': 2, 'string4': 3}
+        for element, score in self.data.iteritems():
+            SortedSet.add(element, score)
+
+    def test_sortedset_multiple_add(self):
+        self.assertEquals(SortedSet.length(0, 3), 4)
+
+    def test_sortedset_element_availability(self):
+        element, score = self.data.iteritems().next()
+        self.assertTrue(SortedSet.contains(element))
+
+    def test_sortedset_members(self):
+        expected_members = sorted(self.data.keys(), reverse=True)
+        self.assertEqual(SortedSet.members(), expected_members)
+
+    def test_sortedset_truncated_members(self):
+        SortedSet.truncate(2)
+        truncated = sorted(self.data.keys(), reverse=True)[:-2]
+        self.assertEqual(SortedSet.members(), truncated)
+
+
 class EmptyPoolTestCase(fixture.TestCase):
     def test_empty_pool(self):
         self.assertIsNone(Pool.pop())
 
 
 class KeyPicklePool(fixture.Redis,
-            redisext.pool.Pool,
-            redisext.serializer.Pickle):
+                    redisext.pool.Pool,
+                    redisext.serializer.Pickle):
     pass
 
 

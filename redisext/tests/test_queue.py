@@ -53,8 +53,8 @@ class PriorityQueueTestCase(fixture.TestCase):
 
 
 class KeyPickleQueue(fixture.Redis,
-            redisext.queue.Queue,
-            redisext.serializer.Pickle):
+                     redisext.queue.Queue,
+                     redisext.serializer.Pickle):
     pass
 
 

@@ -16,15 +16,13 @@ class ExpireCounter(fixture.Redis,
 class ExpireCounterTestCase(fixture.TestCase):
     def setUp(self):
         self.key = 'key'
-
-    def test_expire(self):
         ExpireCounter.increment(self.key)
         ExpireCounter.expire(self.key)
+
+    def test_expire(self):
         self.assertTrue(60 >= ExpireCounter.ttl(self.key) > 0)
 
     def test_persist(self):
-        ExpireCounter.increment(self.key)
-        ExpireCounter.expire(self.key)
         ExpireCounter.persist(self.key)
         self.assertEqual(ExpireCounter.ttl(self.key), -1)
 

@@ -79,8 +79,8 @@ class DecimalStackTestCase(StackTestCase):
 
 
 class PickleStack(fixture.Redis,
-            redisext.stack.Stack,
-            redisext.serializer.Pickle):
+                  redisext.stack.Stack,
+                  redisext.serializer.Pickle):
     KEY = 'stack'
 
 
@@ -94,8 +94,8 @@ class PickleStackTestCase(StackTestCase):
 
 
 class KeyPickleStack(fixture.Redis,
-            redisext.stack.Stack,
-            redisext.serializer.Pickle):
+                     redisext.stack.Stack,
+                     redisext.serializer.Pickle):
     pass
 
 
