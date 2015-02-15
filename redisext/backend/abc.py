@@ -85,8 +85,17 @@ class IClient(object):
 
 class IConnection(object):
     CLIENT = IClient
-    SETTINGS = None
+    MASTER = None
+    SLAVE = None
 
     @classmethod
-    def connect(cls):
-        return cls.CLIENT(**cls.SETTINGS)
+    def connect_to_master(cls):
+        return cls.CLIENT(**cls.MASTER)
+
+    @classmethod
+    def connect_to_slave(cls):
+        if cls.SLAVE:
+            connection_settings = cls.SLAVE
+        else:
+            connection_settings = cls.MASTER
+        return cls.CLIENT(**connection_settings)
