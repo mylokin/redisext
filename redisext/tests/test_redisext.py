@@ -29,7 +29,6 @@ from redisext.serializer import (
     Numeric,
     Pickle,
 )
-from redisext.counter import Counter
 from redisext.key import Expire
 
 
@@ -106,10 +105,6 @@ class TestExpire(TestRedis, HashMap, Pickle, Expire):
 
 
 class TestExpireUndefined(TestRedis, HashMap, Pickle, Expire):
-    pass
-
-
-class TestCounter(TestRedis, Counter):
     pass
 
 
@@ -237,10 +232,6 @@ class TestRedisext(unittest.TestCase):
         TestMap.remove(key)
         self.assertIsNone(TestMap.get(key))
 
-    def test_counter(self):
-        for i in xrange(0, 10):
-            TestCounter.increment('testkey')
-        self.assertEquals(int(TestCounter.get('testkey')), 10)
 
 if __name__ == '__main__':
     unittest.main()
