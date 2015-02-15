@@ -36,10 +36,6 @@ class TestRedis(Redis):
     SETTINGS = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
-class TestPool(TestRedis, Pool, Pickle):
-    KEY = 'pool'
-
-
 class TestQueue(TestRedis, Queue, Pickle):
     KEY = 'queue'
 
@@ -93,13 +89,6 @@ class TestRedisext(unittest.TestCase):
     def tearDown(self):
         TestRedis.connect().flushdb()
 
-    def test_pool(self):
-        data = [1, 2, 3, 4, {'a': 5}]
-        for item in data:
-            TestPool.push(item)
-        for x in xrange(5):
-            self.assertIn(TestPool.pop(), data)
-
     def test_queue(self):
         data = [1, 2, 3]
         for item in data:
@@ -137,7 +126,6 @@ class TestRedisext(unittest.TestCase):
         self.assertEqual(TestSortedSet.members(), truncated)
 
     def test_empty(self):
-        self.assertIsNone(TestPool.pop())
         self.assertIsNone(TestQueue.pop())
         self.assertIsNone(TestPriorityQueue.pop())
         self.assertIsNone(TestHashMap.get('non-esixsted'))
