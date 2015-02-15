@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import redisext.backend.abc
 import redis
 
@@ -7,5 +9,5 @@ class Client(redisext.backend.abc.IClient):
         self._redis = redis.StrictRedis(host, port, db)
 
 
-class Redis(redisext.backend.abc.IRedis):
+class Redis(redisext.backend.abc.IConnection):
     CLIENT = Client

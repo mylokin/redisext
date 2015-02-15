@@ -7,6 +7,9 @@ class IClient(object):
     def expire(self, key, seconds):
         return self._redis.expire(key, seconds)
 
+    def flushdb(self):
+        return self._redis.flushdb()
+
     def delete(self, key):
         return self._redis.delete(key)
 
@@ -83,10 +86,10 @@ class IClient(object):
         return self._redis.zscore(key, member)
 
 
-class IRedis(object):
+class IConnection(object):
     CLIENT = IClient
-    CONNECTION = None
+    SETTINGS = None
 
     @classmethod
     def connect(cls):
-        return cls.CLIENT(**cls.CONNECTION)
+        return cls.CLIENT(**cls.SETTINGS)

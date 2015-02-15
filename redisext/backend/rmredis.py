@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import redisext.backend.abc
 import rm.rmredis
 
@@ -7,5 +9,5 @@ class Client(redisext.backend.abc.IClient):
         self._redis = rm.rmredis.RmRedis.get_instance(database, role)
 
 
-class Redis(redisext.backend.abc.IRedis):
+class Redis(redisext.backend.abc.IConnection):
     CLIENT = Client

@@ -1,32 +1,40 @@
-from django.test import TestCase
+#!/usr/bin/env python
 
-from rm.redisext.redis.rmredis import Redis
-from rm.redisext.hashmap import (
+import sys
+import os.path
+
+CURRENT = os.path.dirname(__file__)
+sys.path.insert(0, os.path.realpath(os.path.join(CURRENT, os.pardir, os.pardir)))
+
+import unittest
+
+from redisext.backend.redispy import Redis
+from redisext.hashmap import (
     HashMap,
     Map,
 )
-from rm.redisext.pool import (
+from redisext.pool import (
     Pool,
     SortedSet,
 )
 
-from rm.redisext.stack import Stack
-from rm.redisext.queue import (
+from redisext.stack import Stack
+from redisext.queue import (
     Queue,
     PriorityQueue,
 )
-from rm.redisext.serializer import (
+from redisext.serializer import (
     JSON,
     String,
     Numeric,
     Pickle,
 )
-from rm.redisext.counter import Counter
-from rm.redisext.key import Expire
+from redisext.counter import Counter
+from redisext.key import Expire
 
 
 class TestRedis(Redis):
-    CONNECTION = {'database': 'social_stats_queue', 'role': 'master'}
+    SETTINGS = {'host': '10.211.55.12', 'port': 6379, 'db': 0}
 
 
 class TestRawStack(TestRedis, Stack):
@@ -105,7 +113,10 @@ class TestCounter(TestRedis, Counter):
     pass
 
 
-class TestRedisext(TestCase):
+class TestRedisext(unittest.TestCase):
+
+    def tearDown(self):
+        TestRedis.connect().flushdb()
 
     def __stack(self, Stack, data):
         for item in data:
@@ -230,3 +241,6 @@ class TestRedisext(TestCase):
         for i in xrange(0, 10):
             TestCounter.increment('testkey')
         self.assertEquals(int(TestCounter.get('testkey')), 10)
+
+if __name__ == '__main__':
+    unittest.main()
