@@ -10,10 +10,10 @@ class Stack(object):
 
     @classmethod
     def pop(cls, key):
-        item = cls.connect().lpop(key)
+        item = cls.connect_to_master().lpop(key)
         return redisext.utils.decode(cls, item)
 
     @classmethod
     def push(cls, key, item):
         item = redisext.utils.encode(cls, item)
-        return cls.connect().lpush(key, item)
+        return cls.connect_to_master().lpush(key, item)
