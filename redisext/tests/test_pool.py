@@ -29,3 +29,13 @@ class PoolTestCase(fixture.TestCase):
 class EmptyPoolTestCase(fixture.TestCase):
     def test_empty_pool(self):
         self.assertIsNone(Pool.pop())
+
+
+class KeyPicklePool(fixture.Redis,
+            redisext.pool.Pool,
+            redisext.serializer.Pickle):
+    pass
+
+
+class KeyPoolTestCase(fixture.KeyTestCase):
+    STORAGE = KeyPicklePool

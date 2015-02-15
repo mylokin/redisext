@@ -50,3 +50,13 @@ class PriorityQueueTestCase(fixture.TestCase):
         self.assertEqual(PriorityQueue.pop(), 'c')
         self.assertEqual(PriorityQueue.pop(), 'b')
         self.assertEqual(PriorityQueue.pop(), 'a')
+
+
+class KeyPickleQueue(fixture.Redis,
+            redisext.queue.Queue,
+            redisext.serializer.Pickle):
+    pass
+
+
+class KeyQueueTestCase(fixture.KeyTestCase):
+    STORAGE = KeyPickleQueue
