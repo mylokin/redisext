@@ -22,9 +22,6 @@ class IClient(object):
     def hget(self, key, hash_key):
         return self._redis.hget(key, hash_key)
 
-    def hmget(self, key, hash_keys):
-        return self._redis.hmget(key, hash_keys)
-
     def hset(self, key, hash_key, value):
         return self._redis.hset(key, hash_key, value)
 
