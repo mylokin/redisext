@@ -7,13 +7,13 @@ Vagrant.configure(2) do |config|
     v.cpus = 1
   end
 
-  config.vm.define "redis" do |redis|
-    redis.vm.box = "parallels/ubuntu-14.04"
-    redis.vm.box_check_update = false
-    redis.vm.network "private_network", type: "dhcp"
-    redis.vm.network :forwarded_port, host: 6379, guest: 6379
-    redis.vm.provision "ansible" do |ansible|
-      ansible.playbook = "redis.yml"
+  config.vm.define "docker" do |docker|
+    docker.vm.box = "parallels/ubuntu-14.04"
+    docker.vm.box_check_update = false
+    docker.vm.network "private_network", type: "dhcp"
+    docker.vm.network :forwarded_port, host: 6379, guest: 6379
+    docker.vm.provision "ansible" do |ansible|
+      ansible.playbook = "docker.yml"
       ansible.sudo = true
       ansible.extra_vars = {
         ansible_ssh_user: "vagrant"
