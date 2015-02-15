@@ -34,7 +34,7 @@ from redisext.key import Expire
 
 
 class TestRedis(Redis):
-    SETTINGS = {'host': '10.211.55.12', 'port': 6379, 'db': 0}
+    SETTINGS = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
 class TestRawStack(TestRedis, Stack):
