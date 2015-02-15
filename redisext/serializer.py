@@ -4,11 +4,7 @@ import json
 import cPickle as pickle
 
 
-class ISerializer(object):
-    pass
-
-
-class JSON(ISerializer):
+class JSON(object):
     @staticmethod
     def encode(item):
         return json.dumps(item)
@@ -18,7 +14,7 @@ class JSON(ISerializer):
         return json.loads(item)
 
 
-class String(ISerializer):
+class String(object):
     @staticmethod
     def encode(item):
         return str(item)
@@ -28,7 +24,7 @@ class String(ISerializer):
         return item
 
 
-class Numeric(ISerializer):
+class Numeric(object):
     @staticmethod
     def encode(item):
         return int(item)
@@ -38,7 +34,7 @@ class Numeric(ISerializer):
         return int(item)
 
 
-class Pickle(ISerializer):
+class Pickle(object):
     @staticmethod
     def encode(item):
         return pickle.dumps(item)
