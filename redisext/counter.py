@@ -13,11 +13,6 @@ class Counter(object):
         return redisext.utils.decode(cls, value)
 
     @classmethod
-    def decrement(cls, key):
-        value = cls.connect().decr(key)
-        return redisext.utils.decode(cls, value)
-
-    @classmethod
     def get(cls, key):
         value = cls.connect().get(key)
         return redisext.utils.decode(cls, value)

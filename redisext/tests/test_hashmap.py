@@ -50,3 +50,19 @@ class MapTestCase(fixture.TestCase):
         Map.put(key, value)
         Map.remove(key)
         self.assertIsNone(Map.get(key))
+
+
+class NumericMap(fixture.Redis, redisext.hashmap.Map):
+    SERIALIZER = redisext.serializer.Numeric
+    KEY = 'key1'
+
+
+class NumericMapTestCase(fixture.TestCase):
+    def test_incr(self):
+        NumericMap.incr()
+        self.assertEqual(NumericMap.get(), 1)
+
+    def test_decr(self):
+        NumericMap.incr()
+        NumericMap.decr()
+        self.assertEqual(NumericMap.get(), 0)

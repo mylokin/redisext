@@ -23,11 +23,6 @@ class CounterTestCase(fixture.TestCase):
     def test_empty_counter(self):
         self.assertIsNone(Counter.get())
 
-    def test_decrement(self):
-        Counter.increment()
-        Counter.decrement()
-        self.assertEquals(Counter.get(), 0)
-
 
 if __name__ == '__main__':
     import unittest
