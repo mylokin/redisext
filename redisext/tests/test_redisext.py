@@ -8,7 +8,7 @@ sys.path.insert(0, os.path.realpath(os.path.join(CURRENT, os.pardir, os.pardir))
 
 import unittest
 
-from redisext.backend.redispy import Redis
+from redisext.backend.redis import Redis
 from redisext.hashmap import (
     HashMap,
     Map,
