@@ -14,12 +14,12 @@ class Expire(object):
                 seconds = int(cls.EXPIRE)
             except TypeError:
                 raise ValueError(seconds)
-        return cls.connect().expire(key, seconds)
+        return cls.connect_to_master().expire(key, seconds)
 
     @classmethod
     def ttl(cls, key):
-        return cls.connect().ttl(key)
+        return cls.connect_to_master().ttl(key)
 
     @classmethod
     def persist(cls, key):
-        return cls.connect().persist(key)
+        return cls.connect_to_master().persist(key)
