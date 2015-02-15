@@ -4,6 +4,8 @@ Redisext
 .. image:: https://travis-ci.org/mylokin/redisext.svg?branch=master
    :target: https://travis-ci.org/mylokin/redisext
 
+.. image:: https://pypip.in/wheel/redisext/badge.svg
+   :target: https://pypi.python.org/pypi/redisext/
 
 Data model example.
 
