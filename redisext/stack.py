@@ -11,13 +11,9 @@ class Stack(object):
     @classmethod
     def pop(cls, key):
         item = cls.connect().lpop(key)
-        if item and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(item)
-        else:
-            return item
+        return redisext.utils.decode(cls, item)
 
     @classmethod
     def push(cls, key, item):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            item = cls.encode(item)
+        item = redisext.utils.encode(cls, item)
         return cls.connect().lpush(key, item)

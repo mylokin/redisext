@@ -14,8 +14,7 @@ class StackTestCase(fixture.TestCase):
             self.assertEqual(item, Stack.pop())
 
 
-class RawStack(fixture.Redis,
-               redisext.stack.Stack):
+class RawStack(fixture.Redis, redisext.stack.Stack):
     KEY = 'raw_stack'
 
 
@@ -33,10 +32,9 @@ class RawStackTestCase(StackTestCase):
         self.assertIsNone(RawStack.pop())
 
 
-class JSONStack(fixture.Redis,
-                redisext.stack.Stack,
-                redisext.serializer.JSON):
+class JSONStack(fixture.Redis, redisext.stack.Stack):
     KEY = 'json_stack'
+    SERIALIZER = redisext.serializer.JSON
 
 
 class JsonStackTestCase(StackTestCase):
@@ -48,10 +46,9 @@ class JsonStackTestCase(StackTestCase):
         self.assertIsNone(JSONStack.pop())
 
 
-class StringStack(fixture.Redis,
-                  redisext.stack.Stack,
-                  redisext.serializer.String):
+class StringStack(fixture.Redis, redisext.stack.Stack):
     KEY = 'string_stack'
+    SERIALIZER = redisext.serializer.String
 
 
 class StringStackTestCase(StackTestCase):
@@ -63,10 +60,9 @@ class StringStackTestCase(StackTestCase):
         self.assertIsNone(StringStack.pop())
 
 
-class DecimalStack(fixture.Redis,
-                   redisext.stack.Stack,
-                   redisext.serializer.Numeric):
+class DecimalStack(fixture.Redis, redisext.stack.Stack):
     KEY = 'decimal_stack'
+    SERIALIZER = redisext.serializer.Numeric
 
 
 class DecimalStackTestCase(StackTestCase):
@@ -78,10 +74,9 @@ class DecimalStackTestCase(StackTestCase):
         self.assertIsNone(DecimalStack.pop())
 
 
-class PickleStack(fixture.Redis,
-                  redisext.stack.Stack,
-                  redisext.serializer.Pickle):
+class PickleStack(fixture.Redis, redisext.stack.Stack):
     KEY = 'stack'
+    SERIALIZER = redisext.serializer.Pickle
 
 
 class PickleStackTestCase(StackTestCase):
@@ -93,10 +88,8 @@ class PickleStackTestCase(StackTestCase):
         self.assertIsNone(PickleStack.pop())
 
 
-class KeyPickleStack(fixture.Redis,
-                     redisext.stack.Stack,
-                     redisext.serializer.Pickle):
-    pass
+class KeyPickleStack(fixture.Redis, redisext.stack.Stack):
+    SERIALIZER = redisext.serializer.Pickle
 
 
 class KeyStackTestCase(fixture.KeyTestCase):
