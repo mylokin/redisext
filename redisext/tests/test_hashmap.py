@@ -5,10 +5,9 @@ import redisext.serializer
 import redisext.tests.fixture as fixture
 
 
-class HashMap(fixture.Redis,
-              redisext.hashmap.HashMap,
-              redisext.serializer.Pickle):
+class HashMap(fixture.Redis, redisext.hashmap.HashMap):
     KEY = 'key'
+    SERIALIZER = redisext.serializer.Pickle
 
 
 class HashMapTestCase(fixture.TestCase):
@@ -35,10 +34,8 @@ class HashMapTestCase(fixture.TestCase):
         self.assertIsNone(HashMap.get('non-esixsted'))
 
 
-class Map(fixture.Redis,
-          redisext.hashmap.Map,
-          redisext.serializer.Pickle):
-    pass
+class Map(fixture.Redis, redisext.hashmap.Map):
+    SERIALIZER = redisext.serializer.Pickle
 
 
 class MapTestCase(fixture.TestCase):

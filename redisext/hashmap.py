@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-import redisext.serializer
 import redisext.utils
 
 
@@ -11,15 +10,11 @@ class HashMap(object):
     @classmethod
     def get(cls, key, hash_key):
         value = cls.connect().hget(key, hash_key)
-        if value and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
 
     @classmethod
     def put(cls, key, hash_key, value):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            value = cls.encode(value)
+        value = redisext.utils.encode(cls, value)
         return cls.connect().hset(key, hash_key, value)
 
     @classmethod
@@ -33,32 +28,22 @@ class Map(object):
     @classmethod
     def get(cls, key):
         value = cls.connect().get(key)
-        if value and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
 
     @classmethod
     def put(cls, key, value):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            value = cls.encode(value)
+        value = redisext.utils.encode(cls, value)
         return cls.connect().set(key, value)
 
     @classmethod
     def incr(cls, key, amount=1):
         value = cls.connect().incr(key, amount)
-        if value and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
 
     @classmethod
     def decr(cls, key, amount=1):
         value = cls.connect().decr(key, amount)
-        if value and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(value)
-        else:
-            return value
+        return redisext.utils.decode(cls, value)
 
     @classmethod
     def remove(cls, key):
