@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
+import functools
+
 import redisext.utils
-import redisext.serializer
 
 
 class Pool(object):
@@ -11,15 +12,11 @@ class Pool(object):
     @classmethod
     def pop(cls, key):
         item = cls.connect().spop(key)
-        if item and issubclass(cls, redisext.serializer.ISerializer):
-            return cls.decode(item)
-        else:
-            return item
+        return redisext.utils.decode(cls, item)
 
     @classmethod
     def push(cls, key, item):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            item = cls.encode(item)
+        item = redisext.utils.encode(cls, item)
         return cls.connect().sadd(key, item)
 
 
@@ -29,8 +26,7 @@ class SortedSet(object):
 
     @classmethod
     def add(cls, key, element, score):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            element = cls.encode(element)
+        element = redisext.utils.encode(cls, element)
         cls.connect().zadd(key, score, element)
 
     @classmethod
@@ -40,15 +36,15 @@ class SortedSet(object):
     @classmethod
     def members(cls, key):
         elements = cls.connect().zrevrange(key, 0, -1)
-        if elements and issubclass(cls, redisext.serializer.ISerializer):
-            return map(cls.decode, elements)
-        else:
+        if not elements:
             return elements
+
+        decode = functools.partial(redisext.utils.decode, cls)
+        return map(decode, elements)
 
     @classmethod
     def contains(cls, key, element):
-        if issubclass(cls, redisext.serializer.ISerializer):
-            element = cls.encode(element)
+        element = redisext.utils.encode(cls, element)
         return cls.connect().zscore(key, element) is not None
 
     @classmethod
