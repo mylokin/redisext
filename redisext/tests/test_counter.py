@@ -20,3 +20,6 @@ class CounterTestCase(fixture.TestCase):
         for x in xrange(10):
             Counter.increment()
         self.assertEquals(Counter.get(), 10)
+
+    def test_empty_counter(self):
+        self.assertIsNone(Counter.get())
