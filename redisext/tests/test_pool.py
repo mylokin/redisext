@@ -64,3 +64,12 @@ class SortedSetTestCase(fixture.TestCase):
         SortedSet.truncate(2)
         truncated = sorted(self.data.keys(), reverse=True)[:-2]
         self.assertEqual(SortedSet.members(), truncated)
+
+    def test_sortedset_clean(self):
+        SortedSet.clean()
+        self.assertEqual(SortedSet.members(), [])
+
+
+class EmptySortedSetTestCase(fixture.TestCase):
+    def test_empty_sorted_set(self):
+        self.assertEqual(SortedSet.members(), [])
