@@ -7,7 +7,10 @@ Redisext
 .. image:: https://pypip.in/wheel/redisext/badge.svg
    :target: https://pypi.python.org/pypi/redisext/
 
-Data model example.
+.. image:: https://pypip.in/d/redisext/badge.png
+   :target: https://crate.io/packages/redisext/
+
+Data model example:
 
 .. code-block:: python
 
