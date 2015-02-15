@@ -5,6 +5,8 @@ Redisext
    :target: https://travis-ci.org/mylokin/redisext
 
 
+Data model example.
+
 .. code-block:: python
 
    import redisext.backend.redis
