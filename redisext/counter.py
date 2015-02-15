@@ -9,8 +9,16 @@ class Counter(object):
 
     @classmethod
     def increment(cls, key):
-        return cls.connect().incr(key)
+        value = cls.connect().incr(key)
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
 
     @classmethod
     def get(cls, key):
-        return cls.connect().get(key)
+        value = cls.connect().get(key)
+        if value and issubclass(cls, redisext.serializer.ISerializable):
+            return cls.decode(value)
+        else:
+            return value
