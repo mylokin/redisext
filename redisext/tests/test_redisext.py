@@ -48,31 +48,7 @@ class TestSortedSet(TestRedis, SortedSet, Pickle):
     KEY = 'sortedset'
 
 
-class TestMultiStack(TestRedis, Stack, Pickle):
-    pass
-
-
-class TestMultiPool(TestRedis, Pool, Pickle):
-    pass
-
-
-class TestMultiQueue(TestRedis, Queue, Pickle):
-    pass
-
-
-class TestMultiPriorityQueue(TestRedis, PriorityQueue, Pickle):
-    pass
-
-
 class TestMultiHashMap(TestRedis, HashMap, Pickle):
-    pass
-
-
-class TestExpire(TestRedis, HashMap, Pickle, Expire):
-    EXPIRE = 60
-
-
-class TestExpireUndefined(TestRedis, HashMap, Pickle, Expire):
     pass
 
 
@@ -104,35 +80,6 @@ class TestRedisext(unittest.TestCase):
 
     def test_empty(self):
         self.assertIsNone(TestHashMap.get('non-esixsted'))
-
-    def test_multi(self):
-        storages = [TestMultiStack, TestMultiPool, TestMultiQueue]
-        key, data = 'key', [{'key': 'value'}, 1, 'string', (1, 2, 3)]
-        for storage in storages:
-            storage.push(key, data)
-            self.assertEqual(storage.pop(key), data)
-        TestMultiPriorityQueue.push(key, data, 0)
-        self.assertEqual(TestMultiPriorityQueue.pop(key), data)
-
-        key, data = 'key', {'key1': 'value1', 'key2': 'value2'}
-        for hash_key, value in data.iteritems():
-            TestMultiHashMap.put(key, hash_key, value)
-            self.assertEqual(TestMultiHashMap.get(key, hash_key), value)
-
-    def test_expire(self):
-        key, hash_key, value = 'expire', 'hash_key', 'value'
-        TestExpire.put(key, hash_key, value)
-        TestExpire.expire(key)
-        self.assertTrue(60 >= TestExpire.ttl(key) > 0)
-        TestExpire.persist(key)
-        self.assertEqual(TestExpire.ttl(key), -1)
-
-    def test_expire_undefined(self):
-        key, hash_key, value = 'expire_undefined', 'hash_key', 'value'
-        TestExpireUndefined.put(key, hash_key, value)
-        self.assertRaises(ValueError, TestExpireUndefined.expire, key)
-        TestExpire.expire(key, 60)
-        self.assertTrue(60 >= TestExpire.ttl(key) > 0)
 
     def test_map(self):
         data = {'map_key1': 'value1', 'map_key2': 'value2'}
