@@ -10,3 +10,8 @@ publish:
 
 clean:
 	rm -rf build dist redisext.egg-info
+
+docs:
+	rm -rf docs/_build/*
+	python setup.py build_sphinx
+	python setup.py upload_sphinx
