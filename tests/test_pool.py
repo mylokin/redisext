@@ -23,7 +23,7 @@ class PoolTestCase(fixture.TestCase):
         self.assertIn(self.pool.pop(), self.data)
 
     def test_pool_multiple_pop(self):
-        for x in xrange(self.length):
+        for x in range(self.length):
             self.assertIn(self.pool.pop(), self.data)
 
 
@@ -49,14 +49,14 @@ class SortedSetTestCase(fixture.TestCase):
     def setUp(self):
         self.data = {'string1': 0, 'string2': 1, 'string3': 2, 'string4': 3}
         self.sortedset = SortedSet()
-        for element, score in self.data.iteritems():
+        for element, score in self.data.items():
             self.sortedset.add(element, score)
 
     def test_sortedset_multiple_add(self):
         self.assertEquals(self.sortedset.length(0, 3), 4)
 
     def test_sortedset_element_availability(self):
-        element, score = self.data.iteritems().next()
+        element, score = next(iter(self.data.items()))
         self.assertTrue(self.sortedset.contains(element))
 
     def test_sortedset_members(self):

@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 import json
-import cPickle as pickle
+import pickle
 
 
 class JSON(object):
@@ -11,6 +11,8 @@ class JSON(object):
 
     @staticmethod
     def decode(item):
+        if isinstance(item, bytes):
+            item = item.decode()
         return json.loads(item)
 
 
@@ -21,6 +23,8 @@ class String(object):
 
     @staticmethod
     def decode(item):
+        if isinstance(item, bytes):
+            item = item.decode()
         return item
 
 

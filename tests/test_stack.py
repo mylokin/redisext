@@ -24,12 +24,12 @@ class RawStackTestCase(StackTestCase):
         self.raw_stack = RawStack()
 
     def test_rawstack(self):
-        data = ['1', '2', '3']
+        data = [b'1', b'2', b'3']
         self._stack(self.raw_stack, data)
 
     def test_different_types_for_raw_stack(self):
-        data = [1, '2', '3']
-        expect = reversed(['1', '2', '3'])
+        data = [1, b'2', b'3']
+        expect = reversed([b'1', b'2', b'3'])
         self._stack(self.raw_stack, data, expect)
 
     def test_empty_for_raw_stack(self):

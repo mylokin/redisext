@@ -28,7 +28,7 @@ class HashMapTestCase(fixture.TestCase):
 
     def test_multiple_put_and_removal_into_hashmap(self):
         data = {'key1': 'value1', 'key2': 'value2'}
-        for key, value in data.iteritems():
+        for key, value in data.items():
             self.hashmap.put(key, value)
             self.assertEqual(self.hashmap.get(key), value)
             self.hashmap.remove(key)
@@ -45,7 +45,7 @@ class Map(fixture.Connection, redisext.hashmap.Map):
 class MapTestCase(fixture.TestCase):
     def test_multiple_map_set(self):
         data = {'map_key1': 'value1', 'map_key2': 'value2'}
-        for key, value in data.iteritems():
+        for key, value in data.items():
             Map(key).put(value)
             self.assertEqual(Map(key).get(), value)
 

@@ -26,7 +26,7 @@ class SortedSet(redisext.models.abc.Model):
         if not elements:
             return elements
 
-        return map(self.decode, elements)
+        return [self.decode(e) for e in elements]
 
     def contains(self, element):
         element = self.encode(element)

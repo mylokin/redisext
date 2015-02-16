@@ -20,7 +20,7 @@ class CounterTestCase(fixture.TestCase):
         self.assertEquals(self.counter.get(), 1)
 
     def test_multiple_increment(self):
-        for x in xrange(10):
+        for x in range(10):
             self.counter.increment()
         self.assertEquals(self.counter.get(), 10)
 
