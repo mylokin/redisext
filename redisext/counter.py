@@ -1,18 +1,13 @@
 from __future__ import absolute_import
 
-import redisext.utils
+import redisext.models.abc
 
 
-class Counter(object):
-    __metaclass__ = redisext.utils.KeyHandler
-    KEY = None
+class Counter(redisext.models.abc.Model):
+    def increment(self):
+        value = self.connect_to_master().incr(self.key)
+        return self.decode(value)
 
-    @classmethod
-    def increment(cls, key):
-        value = cls.connect_to_master().incr(key)
-        return redisext.utils.decode(cls, value)
-
-    @classmethod
-    def get(cls, key):
-        value = cls.connect_to_slave().get(key)
-        return redisext.utils.decode(cls, value)
+    def get(self):
+        value = self.connect_to_slave().get(self.key)
+        return self.decode(value)
