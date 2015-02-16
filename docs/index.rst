@@ -1,12 +1,7 @@
 Welcome to Redisext's documentation!
 ====================================
 
-Contents:
-
-.. toctree::
-   :maxdepth: 2
-
-
+.. automodule:: redisext
 
 Indices and tables
 ==================
