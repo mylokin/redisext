@@ -1,25 +1,19 @@
 from __future__ import absolute_import
 
-import redisext.utils
-
 
 class Expire(object):
-    __metaclass__ = redisext.utils.KeyHandler
     EXPIRE = None
 
-    @classmethod
-    def expire(cls, key, seconds=None):
+    def expire(self, seconds=None):
         if seconds is None:
             try:
-                seconds = int(cls.EXPIRE)
+                seconds = int(self.EXPIRE)
             except TypeError:
                 raise ValueError(seconds)
-        return cls.connect_to_master().expire(key, seconds)
+        return self.connect_to_master().expire(self.key, seconds)
 
-    @classmethod
-    def ttl(cls, key):
-        return cls.connect_to_master().ttl(key)
+    def ttl(self):
+        return self.connect_to_master().ttl(self.key)
 
-    @classmethod
-    def persist(cls, key):
-        return cls.connect_to_master().persist(key)
+    def persist(self):
+        return self.connect_to_master().persist(self.key)

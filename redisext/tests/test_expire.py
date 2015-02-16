@@ -15,16 +15,16 @@ class ExpireCounter(fixture.Connection,
 
 class ExpireCounterTestCase(fixture.TestCase):
     def setUp(self):
-        self.key = 'key'
-        ExpireCounter.increment(self.key)
-        ExpireCounter.expire(self.key)
+        self.counter = ExpireCounter('key')
+        self.counter.increment()
+        self.counter.expire()
 
     def test_expire(self):
-        self.assertTrue(60 >= ExpireCounter.ttl(self.key) > 0)
+        self.assertTrue(60 >= self.counter.ttl() > 0)
 
     def test_persist(self):
-        ExpireCounter.persist(self.key)
-        self.assertEqual(ExpireCounter.ttl(self.key), -1)
+        self.counter.persist()
+        self.assertEqual(self.counter.ttl(), -1)
 
 
 class UnspecifiedExpireCounter(fixture.Connection,
@@ -36,14 +36,14 @@ class UnspecifiedExpireCounter(fixture.Connection,
 
 class UnspecifiedExpireCounterTestCase(fixture.TestCase):
     def setUp(self):
-        self.key = 'key'
+        self.counter = UnspecifiedExpireCounter('key')
 
     def test_expire_unspecified(self):
-        UnspecifiedExpireCounter.increment(self.key)
+        self.counter.increment()
         with self.assertRaises(ValueError):
-            UnspecifiedExpireCounter.expire(self.key)
+            self.counter.expire()
 
     def test_expire_specified(self):
-        UnspecifiedExpireCounter.increment(self.key)
-        UnspecifiedExpireCounter.expire(self.key, 60)
-        self.assertTrue(60 >= UnspecifiedExpireCounter.ttl(self.key) > 0)
+        self.counter.increment()
+        self.counter.expire(60)
+        self.assertTrue(60 >= self.counter.ttl() > 0)

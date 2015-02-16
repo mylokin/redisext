@@ -11,27 +11,30 @@ class HashMap(fixture.Connection, redisext.hashmap.HashMap):
 
 
 class HashMapTestCase(fixture.TestCase):
+    def setUp(self):
+        self.hashmap = HashMap()
+
     def test_single_put_into_hashmap(self):
         key, value = 'key1', 'value1'
-        HashMap.put(key, value)
-        self.assertEqual(HashMap.get(key), value)
+        self.hashmap.put(key, value)
+        self.assertEqual(self.hashmap.get(key), value)
 
     def test_single_removal_from_hashmap(self):
         key, value = 'key1', 'value1'
-        HashMap.put(key, value)
-        HashMap.remove(key)
-        self.assertIsNone(HashMap.get(key))
+        self.hashmap.put(key, value)
+        self.hashmap.remove(key)
+        self.assertIsNone(self.hashmap.get(key))
 
     def test_multiple_put_and_removal_into_hashmap(self):
         data = {'key1': 'value1', 'key2': 'value2'}
         for key, value in data.iteritems():
-            HashMap.put(key, value)
-            self.assertEqual(HashMap.get(key), value)
-            HashMap.remove(key)
-            self.assertIsNone(HashMap.get(key))
+            self.hashmap.put(key, value)
+            self.assertEqual(self.hashmap.get(key), value)
+            self.hashmap.remove(key)
+            self.assertIsNone(self.hashmap.get(key))
 
     def test_empty_hashmap(self):
-        self.assertIsNone(HashMap.get('non-esixsted'))
+        self.assertIsNone(self.hashmap.get('non-esixsted'))
 
 
 class Map(fixture.Connection, redisext.hashmap.Map):
@@ -42,14 +45,14 @@ class MapTestCase(fixture.TestCase):
     def test_multiple_map_set(self):
         data = {'map_key1': 'value1', 'map_key2': 'value2'}
         for key, value in data.iteritems():
-            Map.put(key, value)
-            self.assertEqual(Map.get(key), value)
+            Map(key).put(value)
+            self.assertEqual(Map(key).get(), value)
 
     def test_empty_map(self):
         key, value = 'key1', 'value1'
-        Map.put(key, value)
-        Map.remove(key)
-        self.assertIsNone(Map.get(key))
+        Map(key).put(value)
+        Map(key).remove()
+        self.assertIsNone(Map(key).get())
 
 
 class NumericMap(fixture.Connection, redisext.hashmap.Map):
@@ -58,11 +61,14 @@ class NumericMap(fixture.Connection, redisext.hashmap.Map):
 
 
 class NumericMapTestCase(fixture.TestCase):
+    def setUp(self):
+        self.numeric_map = NumericMap()
+
     def test_incr(self):
-        NumericMap.incr()
-        self.assertEqual(NumericMap.get(), 1)
+        self.numeric_map.incr()
+        self.assertEqual(self.numeric_map.get(), 1)
 
     def test_decr(self):
-        NumericMap.incr()
-        NumericMap.decr()
-        self.assertEqual(NumericMap.get(), 0)
+        self.numeric_map.incr()
+        self.numeric_map.decr()
+        self.assertEqual(self.numeric_map.get(), 0)

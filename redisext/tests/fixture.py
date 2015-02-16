@@ -19,5 +19,5 @@ class KeyTestCase(TestCase):
 
     def test_keys(self):
         key, data = 'key', [{'key': 'value'}, 1, 'string', (1, 2, 3)]
-        self.STORAGE.push(key, data)
-        self.assertEqual(self.STORAGE.pop(key), data)
+        self.STORAGE(key).push(data)
+        self.assertEqual(self.STORAGE(key).pop(), data)

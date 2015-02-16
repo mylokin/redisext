@@ -1,19 +1,13 @@
 from __future__ import absolute_import
 
-import redisext.serializer
-import redisext.utils
+import redisext.models.abc
 
 
-class Stack(object):
-    __metaclass__ = redisext.utils.KeyHandler
-    KEY = None
+class Stack(redisext.models.abc.Model):
+    def pop(self):
+        item = self.connect_to_master().lpop(self.key)
+        return self.decode(item)
 
-    @classmethod
-    def pop(cls, key):
-        item = cls.connect_to_master().lpop(key)
-        return redisext.utils.decode(cls, item)
-
-    @classmethod
-    def push(cls, key, item):
-        item = redisext.utils.encode(cls, item)
-        return cls.connect_to_master().lpush(key, item)
+    def push(self, item):
+        item = self.encode(item)
+        return self.connect_to_master().lpush(self.key, item)

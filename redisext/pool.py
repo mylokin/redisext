@@ -1,56 +1,39 @@
 from __future__ import absolute_import
 
-import functools
-
-import redisext.utils
+import redisext.models.abc
 
 
-class Pool(object):
-    __metaclass__ = redisext.utils.KeyHandler
-    KEY = None
+class Pool(redisext.models.abc.Model):
+    def pop(self):
+        item = self.connect_to_master().spop(self.key)
+        return self.decode(item)
 
-    @classmethod
-    def pop(cls, key):
-        item = cls.connect_to_master().spop(key)
-        return redisext.utils.decode(cls, item)
-
-    @classmethod
-    def push(cls, key, item):
-        item = redisext.utils.encode(cls, item)
-        return cls.connect_to_master().sadd(key, item)
+    def push(self, item):
+        item = self.encode(item)
+        return self.connect_to_master().sadd(self.key, item)
 
 
-class SortedSet(object):
-    __metaclass__ = redisext.utils.KeyHandler
-    KEY = None
+class SortedSet(redisext.models.abc.Model):
+    def add(self, element, score):
+        element = self.encode(element)
+        return bool(self.connect_to_master().zadd(self.key, score, element))
 
-    @classmethod
-    def add(cls, key, element, score):
-        element = redisext.utils.encode(cls, element)
-        cls.connect_to_master().zadd(key, score, element)
+    def length(self, start_score, end_score):
+        return int(self.connect_to_slave().zcount(self.key, start_score, end_score))
 
-    @classmethod
-    def length(cls, key, start_score, end_score):
-        return cls.connect_to_slave().zcount(key, start_score, end_score)
-
-    @classmethod
-    def members(cls, key):
-        elements = cls.connect_to_slave().zrevrange(key, 0, -1)
+    def members(self):
+        elements = self.connect_to_slave().zrevrange(self.key, 0, -1)
         if not elements:
             return elements
 
-        decode = functools.partial(redisext.utils.decode, cls)
-        return map(decode, elements)
+        return map(self.decode, elements)
 
-    @classmethod
-    def contains(cls, key, element):
-        element = redisext.utils.encode(cls, element)
-        return cls.connect_to_slave().zscore(key, element) is not None
+    def contains(self, element):
+        element = self.encode(element)
+        return self.connect_to_slave().zscore(self.key, element) is not None
 
-    @classmethod
-    def truncate(cls, key, size):
-        return cls.connect_to_master().zremrangebyrank(key, 0, -1 * size - 1)
+    def truncate(self, size):
+        return int(self.connect_to_master().zremrangebyrank(self.key, 0, -1 * size - 1))
 
-    @classmethod
-    def clean(cls, key):
-        return cls.connect_to_master().delete(key)
+    def clean(self):
+        return bool(self.connect_to_master().delete(self.key))
