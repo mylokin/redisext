@@ -1,50 +1,37 @@
 from __future__ import absolute_import
 
-import redisext.utils
+import redisext.models.abc
 
 
-class HashMap(object):
-    __metaclass__ = redisext.utils.KeyHandler
-    KEY = None
+class HashMap(redisext.models.abc.Model):
+    def get(self, hash_key):
+        value = self.connect_to_slave().hget(self.key, hash_key)
+        return self.decode(value)
 
-    @classmethod
-    def get(cls, key, hash_key):
-        value = cls.connect_to_slave().hget(key, hash_key)
-        return redisext.utils.decode(cls, value)
+    def put(self, hash_key, value):
+        value = self.encode(value)
+        return self.connect_to_master().hset(self.key, hash_key, value)
 
-    @classmethod
-    def put(cls, key, hash_key, value):
-        value = redisext.utils.encode(cls, value)
-        return cls.connect_to_master().hset(key, hash_key, value)
-
-    @classmethod
-    def remove(cls, key, hash_key):
-        return bool(cls.connect_to_master().hdel(key, hash_key))
+    def remove(self, hash_key):
+        return bool(self.connect_to_master().hdel(self.key, hash_key))
 
 
-class Map(object):
-    __metaclass__ = redisext.utils.KeyHandler
+class Map(redisext.models.abc.Model):
+    def get(self):
+        value = self.connect_to_slave().get(self.key)
+        return self.decode(value)
 
-    @classmethod
-    def get(cls, key):
-        value = cls.connect_to_slave().get(key)
-        return redisext.utils.decode(cls, value)
+    def put(self, value):
+        value = self.encode(value)
+        return self.connect_to_master().set(self.key, value)
 
-    @classmethod
-    def put(cls, key, value):
-        value = redisext.utils.encode(cls, value)
-        return cls.connect_to_master().set(key, value)
+    def incr(self, amount=1):
+        value = self.connect_to_master().incr(self.key, amount)
+        return self.decode(value)
 
-    @classmethod
-    def incr(cls, key, amount=1):
-        value = cls.connect_to_master().incr(key, amount)
-        return redisext.utils.decode(cls, value)
+    def decr(self, amount=1):
+        value = self.connect_to_master().decr(self.key, amount)
+        return self.decode(value)
 
-    @classmethod
-    def decr(cls, key, amount=1):
-        value = cls.connect_to_master().decr(key, amount)
-        return redisext.utils.decode(cls, value)
-
-    @classmethod
-    def remove(cls, key):
-        return bool(cls.connect_to_master().delete(key))
+    def remove(self):
+        return bool(self.connect_to_master().delete(self.key))
