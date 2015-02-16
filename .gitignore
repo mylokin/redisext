@@ -2,5 +2,7 @@
 .vagrant
 .coverage
 
+etc/venv/
+
 build
 dist
