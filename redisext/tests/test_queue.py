@@ -11,20 +11,23 @@ class Queue(fixture.Connection, redisext.queue.Queue):
 
 
 class QueueTestCase(fixture.TestCase):
+    def setUp(self):
+        self.queue = Queue()
+
     def test_single_push_to_queue(self):
         item = 1
-        Queue.push(item)
-        self.assertEqual(Queue.pop(), item)
+        self.queue.push(item)
+        self.assertEqual(self.queue.pop(), item)
 
     def test_multiple_push_to_queue(self):
         data = [1, 2, 3]
         for item in data:
-            Queue.push(item)
+            self.queue.push(item)
         for item in data:
-            self.assertEqual(Queue.pop(), item)
+            self.assertEqual(self.queue.pop(), item)
 
     def test_empty_counter(self):
-        self.assertIsNone(Queue.pop())
+        self.assertIsNone(self.queue.pop())
 
 
 class PriorityQueue(fixture.Connection, redisext.queue.PriorityQueue):
@@ -33,21 +36,24 @@ class PriorityQueue(fixture.Connection, redisext.queue.PriorityQueue):
 
 
 class PriorityQueueTestCase(fixture.TestCase):
+    def setUp(self):
+        self.priority_queue = PriorityQueue()
+
     def test_push_to_priority_queue(self):
         data = [('a', 1), ('b', 3), ('c', 3)]
         for item in data:
-            PriorityQueue.push(*item)
-        self.assertEqual(PriorityQueue.pop(), 'a')
-        self.assertIn(PriorityQueue.pop(), ['b', 'c'])
-        self.assertIn(PriorityQueue.pop(), ['b', 'c'])
+            self.priority_queue.push(*item)
+        self.assertEqual(self.priority_queue.pop(), 'a')
+        self.assertIn(self.priority_queue.pop(), ['b', 'c'])
+        self.assertIn(self.priority_queue.pop(), ['b', 'c'])
 
     def test_unordered_push_to_priority_queue(self):
         data = [('a', 3), ('b', 2), ('c', 1)]
         for item in data:
-            PriorityQueue.push(*item)
-        self.assertEqual(PriorityQueue.pop(), 'c')
-        self.assertEqual(PriorityQueue.pop(), 'b')
-        self.assertEqual(PriorityQueue.pop(), 'a')
+            self.priority_queue.push(*item)
+        self.assertEqual(self.priority_queue.pop(), 'c')
+        self.assertEqual(self.priority_queue.pop(), 'b')
+        self.assertEqual(self.priority_queue.pop(), 'a')
 
 
 class KeyPickleQueue(fixture.Connection, redisext.queue.Queue):
