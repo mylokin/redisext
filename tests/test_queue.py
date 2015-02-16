@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 import redisext.queue
 import redisext.serializer
-import redisext.tests.fixture as fixture
+
+from . import fixture
 
 
 class Queue(fixture.Connection, redisext.queue.Queue):

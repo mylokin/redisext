@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 import redisext.counter
 import redisext.serializer
-import redisext.tests.fixture as fixture
+
+from . import fixture
 
 
 class Counter(fixture.Connection, redisext.counter.Counter):

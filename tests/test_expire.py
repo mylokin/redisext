@@ -3,7 +3,8 @@ from __future__ import absolute_import
 import redisext.counter
 import redisext.key
 import redisext.serializer
-import redisext.tests.fixture as fixture
+
+from . import fixture
 
 
 class ExpireCounter(fixture.Connection,

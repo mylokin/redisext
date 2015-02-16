@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 import redisext.serializer
 import redisext.stack
-import redisext.tests.fixture as fixture
+
+from . import fixture
 
 
 class StackTestCase(fixture.TestCase):

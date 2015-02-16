@@ -2,7 +2,8 @@ from __future__ import absolute_import
 
 import redisext.pool
 import redisext.serializer
-import redisext.tests.fixture as fixture
+
+from . import fixture
 
 
 class Pool(fixture.Connection, redisext.pool.Pool):
