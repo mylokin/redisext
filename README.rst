@@ -10,6 +10,14 @@ Redisext
 .. image:: https://pypip.in/d/redisext/badge.png
    :target: https://crate.io/packages/redisext/
 
+Documentation
+-------------
+
+Documentation is available at https://pythonhosted.org/redisext/.
+
+Example
+-------
+
 Data model example:
 
 .. code-block:: python
