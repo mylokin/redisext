@@ -4,7 +4,7 @@ Introduction
 
 Redisext is a tool for data modeling. Its primary goal is to provide light
 interface to well-known data models based on Redis such as queues, hashmaps,
-counters, pools and stacks. Redisext could be threated like an ORM for Redis.
+counters, pools and stacks. Redisext could be treated as a ORM for Redis.
 
 Tutorial
 --------
