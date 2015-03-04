@@ -15,3 +15,5 @@ docs:
 	rm -rf docs/_build/*
 	python setup.py build_sphinx
 	python setup.py upload_sphinx
+
+.PHONY: test redis publish clean docs
