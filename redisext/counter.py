@@ -15,7 +15,7 @@ Model allows to build counters in a minute. For example::
        SERIALIZER = redisext.serializer.Numeric
 
 
-This is it! You can start using it. Mythical frontpage view::
+This is it! You can start using it. Example of mythical frontpage view::
 
    def frontpage():
        visitors_counter = Visitors('fronpage')
