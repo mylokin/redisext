@@ -43,8 +43,6 @@ Data Models
 
 .. automodule:: redisext.hashmap
 
-.. automodule:: redisext.key
-
 .. automodule:: redisext.pool
 
 .. automodule:: redisext.queue
@@ -59,6 +57,7 @@ Abstract Model
 
 .. automodule:: redisext.serializer
 
+.. automodule:: redisext.key
 
 Backend
 -------

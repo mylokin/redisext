@@ -1,3 +1,17 @@
+'''
+Pool
+^^^^
+
+.. autoclass:: Pool
+   :members:
+
+SortedSet
+^^^^^^^^^
+
+.. autoclass:: SortedSet
+   :members:
+
+'''
 from __future__ import absolute_import
 
 import redisext.models.abc

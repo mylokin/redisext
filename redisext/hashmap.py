@@ -1,3 +1,17 @@
+'''
+HashMap
+^^^^^^^
+
+.. autoclass:: HashMap
+   :members:
+
+Map
+^^^
+
+.. autoclass:: Map
+   :members:
+
+'''
 from __future__ import absolute_import
 
 import redisext.models.abc

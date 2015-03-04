@@ -1,3 +1,18 @@
+'''
+Queue
+^^^^^
+
+.. autoclass:: Queue
+   :members:
+
+PriorityQueue
+^^^^^^^^^^^^^
+
+.. autoclass:: PriorityQueue
+   :members:
+
+'''
+
 from __future__ import absolute_import
 
 import redisext.models.abc

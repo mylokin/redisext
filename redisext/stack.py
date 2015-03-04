@@ -1,3 +1,11 @@
+'''
+Stack
+^^^^^
+
+.. autoclass:: Stack
+   :members:
+
+'''
 from __future__ import absolute_import
 
 import redisext.models.abc
