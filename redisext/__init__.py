@@ -1,11 +1,13 @@
 '''
-Tutorial
---------
+Introduction
+------------
 
-Models
-------
+Redisext is a tool for data modeling. Its primary goal is to provide light
+interface to well-known data models based on Redis such as queues, hashmaps,
+counters, pools and stacks. Redisext could be threated like an ORM for Redis.
 
-.. automodule:: redisext.models
+Data Models
+-----------
 
 .. automodule:: redisext.counter
 
@@ -19,7 +21,14 @@ Models
 
 .. automodule:: redisext.stack
 
+
+Abstract Model
+--------------
+
+.. automodule:: redisext.models
+
 .. automodule:: redisext.serializer
+
 
 Backend
 -------
