@@ -7,13 +7,6 @@ Counter
 
 Example of unread messages counter::
 
-   import redisext.backend.redis
-   import redisext.counter
-   import redisext.serializer
-
-   class Connection(redisext.backend.redis.Connection):
-       MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
-
    class Unread(Connection, redisext.counter.Counter):
        SERIALIZER = redisext.serializer.Numeric
 
