@@ -46,7 +46,8 @@ class Counter(redisext.models.abc.Model):
     def incr(self, value=1):
         ''' Increment counter by `value`.
 
-        :param value: int -- value to add
+        :param value: value to add
+        :type value: int
 
         :returns: counter's value
         :rtype: int
