@@ -21,11 +21,13 @@ class Counter(redisext.models.abc.Model):
         value = self.connect_to_slave().get(self.key)
         return self.decode(value)
 
-    def increment(self):
-        ''' Increment counter by 1.
+    def incr(self, value=1):
+        ''' Increment counter by `value`.
+
+        :param value: int -- value to add
 
         :returns: counter's value
         :rtype: int
         '''
-        value = self.connect_to_master().incr(self.key)
+        value = self.connect_to_master().incr(self.key, value)
         return self.decode(value)

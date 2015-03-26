@@ -16,12 +16,16 @@ class CounterTestCase(fixture.TestCase):
         self.counter = Counter()
 
     def test_single_increment(self):
-        self.counter.increment()
+        self.counter.incr()
         self.assertEquals(self.counter.get(), 1)
+
+    def test_single_increment_by_5(self):
+        self.counter.incr(5)
+        self.assertEquals(self.counter.get(), 5)
 
     def test_multiple_increment(self):
         for x in range(10):
-            self.counter.increment()
+            self.counter.incr()
         self.assertEquals(self.counter.get(), 10)
 
     def test_empty_counter(self):

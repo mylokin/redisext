@@ -17,7 +17,7 @@ class ExpireCounter(fixture.Connection,
 class ExpireCounterTestCase(fixture.TestCase):
     def setUp(self):
         self.counter = ExpireCounter('key')
-        self.counter.increment()
+        self.counter.incr()
         self.counter.expire()
 
     def test_expire(self):
@@ -40,11 +40,11 @@ class UnspecifiedExpireCounterTestCase(fixture.TestCase):
         self.counter = UnspecifiedExpireCounter('key')
 
     def test_expire_unspecified(self):
-        self.counter.increment()
+        self.counter.incr()
         with self.assertRaises(ValueError):
             self.counter.expire()
 
     def test_expire_specified(self):
-        self.counter.increment()
+        self.counter.incr()
         self.counter.expire(60)
         self.assertTrue(60 >= self.counter.ttl() > 0)
