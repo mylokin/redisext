@@ -1,38 +1,3 @@
-'''
-Queue
-_____
-
-.. autoclass:: Queue
-   :members:
-
-Right, task queue::
-
-   class Task(Connection, redisext.queue.Queue):
-       SERIALIZER = redisext.serializer.Pickle
-
-and it's as simple as looks::
-
-   >>> task_queue = Task('data_processing')
-   >>> task_queue.pop()
-   >>> task_queue.push({'task': 't1'})
-   1L
-   >>> task_queue.push({'task': 't2'})
-   2L
-   >>> task_queue.push({'task': 't3'})
-   3L
-   >>> task_queue.pop()
-   {'task': 't1'}
-   >>> task_queue.pop()
-   {'task': 't2'}
-   >>> task_queue.pop()
-   {'task': 't3'}
-   >>> task_queue.pop()
-   >>>
-
-Here is priority queue as well :class:`redisext.queue.PriorityQueue`.
-
-'''
-
 from __future__ import absolute_import
 
 import redisext.models.abc
