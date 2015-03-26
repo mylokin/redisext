@@ -49,6 +49,14 @@ Data Models
 
 .. automodule:: redisext.stack
 
+Imports section is intentionaly skiped, but for ther order::
+
+   import redisext.backend.redis
+   import redisext.serializer
+
+   class Connection(redisext.backend.redis.Connection):
+      MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
+
 
 Abstract Model
 --------------
