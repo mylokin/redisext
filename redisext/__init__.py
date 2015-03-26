@@ -49,11 +49,11 @@ Data Models
 
 .. automodule:: redisext.stack
 
-.. note::
 
-   Imports section is intentionaly skiped, but for ther order it is listed below.
+Missed Imports
+--------------
 
-Imports::
+Imports section is intentionaly skiped, but for ther order it is listed below::
 
    import redisext.backend.redis
    import redisext.serializer
