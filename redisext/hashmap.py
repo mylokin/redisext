@@ -34,7 +34,7 @@ use-case example for cache::
 .. note::
 
    Also don't forget to check :class:`redisext.hashmap.HashMap` if you need
-   store more complicated data structures.
+   to store more complicated data structures.
 
 '''
 from __future__ import absolute_import
