@@ -1,5 +1,5 @@
 test:
-	flake8
+	flake8 redisext tests docs
 	nosetests --with-coverage --cover-package=redisext
 
 redis:
