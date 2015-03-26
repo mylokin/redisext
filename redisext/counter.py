@@ -20,12 +20,13 @@ Example of unread messages counter::
 could be used like::
 
    >>> unread = Unread('messages')
-   >>> unread.get()
+   >>> unread.get()  # key does not exist
    >>> unread.incr()
    1
    >>> unread.incr(5)
    6
    >>> unread.get()
+   6
 '''
 from __future__ import absolute_import
 
