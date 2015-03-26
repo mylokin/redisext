@@ -73,3 +73,5 @@ Abstract Model
 
 .. automodule:: redisext.backend
 '''
+
+__version__ = '1.1.4'

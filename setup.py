@@ -1,12 +1,24 @@
+import re
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
 
+version = ''
+
+with open('redisext/__init__.py', 'r') as fd:
+    regex = re.compile(r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]')
+    for line in fd:
+        m = regex.match(line)
+        if m:
+            version = m.group(1)
+            break
+
 setup(
     name='redisext',
     packages=['redisext', 'redisext.backend', 'redisext.models'],
-    version='1.1.3',
+    package_data={'': ['LICENSE']},
+    version=version,
     description='Data models for Redis',
     author='Andrey Gubarev',
     author_email='mylokin@me.com',
