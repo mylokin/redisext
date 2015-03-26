@@ -1,10 +1,31 @@
 '''
 Counter
-^^^^^^^
+-------
 
 .. autoclass:: Counter
    :members:
 
+Example of unread messages counter::
+
+   import redisext.backend.redis
+   import redisext.counter
+   import redisext.serializer
+
+   class Connection(redisext.backend.redis.Connection):
+       MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
+
+   class Unread(Connection, redisext.counter.Counter):
+       SERIALIZER = redisext.serializer.Numeric
+
+could be used like::
+
+   >>> unread = Unread('messages')
+   >>> unread.get()
+   >>> unread.incr()
+   1
+   >>> unread.incr(5)
+   6
+   >>> unread.get()
 '''
 from __future__ import absolute_import
 
