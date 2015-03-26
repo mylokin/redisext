@@ -37,7 +37,7 @@ This is it! You can start using it. Example of mythical frontpage view::
    Details on :class:`redisext.counter.Counter`.
 
 Data Models
------------
+===========
 
 .. automodule:: redisext.counter
 
