@@ -1,15 +1,35 @@
 '''
 Queue
-^^^^^
+_____
 
 .. autoclass:: Queue
    :members:
 
-PriorityQueue
-^^^^^^^^^^^^^
+Right, task queue::
 
-.. autoclass:: PriorityQueue
-   :members:
+   class Task(Connection, redisext.queue.Queue):
+       SERIALIZER = redisext.serializer.Pickle
+
+and it's as simple as looks::
+
+   >>> task_queue = Task('data_processing')
+   >>> task_queue.pop()
+   >>> task_queue.push({'task': 't1'})
+   1L
+   >>> task_queue.push({'task': 't2'})
+   2L
+   >>> task_queue.push({'task': 't3'})
+   3L
+   >>> task_queue.pop()
+   {'task': 't1'}
+   >>> task_queue.pop()
+   {'task': 't2'}
+   >>> task_queue.pop()
+   {'task': 't3'}
+   >>> task_queue.pop()
+   >>>
+
+Here is priority queue as well :class:`redisext.queue.PriorityQueue`.
 
 '''
 
@@ -20,10 +40,24 @@ import redisext.models.abc
 
 class Queue(redisext.models.abc.Model):
     def pop(self):
+        '''
+        Pop item from queue.
+
+        :returns: item from queue
+        '''
         item = self.connect_to_master().rpop(self.key)
         return self.decode(item)
 
     def push(self, item):
+        '''
+        Push item into queue.
+
+        :param item:
+        :type item:
+
+        :returns: number of items in queue
+        :rtype: int
+        '''
         item = self.encode(item)
         return self.connect_to_master().lpush(self.key, item)
 
