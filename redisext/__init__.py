@@ -18,7 +18,7 @@ Counter Model allows you to build counters in a minute. For example::
    class Connection(redisext.backend.redis.Connection):
        MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
 
-   class Visitors(Connection, redisext.Counter):
+   class Visitors(Connection, redisext.counter.Counter):
        SERIALIZER = redisext.serializer.Numeric
 
 
