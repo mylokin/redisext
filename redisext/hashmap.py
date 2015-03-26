@@ -11,6 +11,8 @@ For example storing Twitter's username::
    class TwitterUsername(Connection, redisext.hashmap.Map):
        SERIALIZER = redisext.serializer.String
 
+and use-case::
+
    >>> TwitterUsername(1).put('mylokin')
    True
    >>> TwitterUsername(1).get()
@@ -20,6 +22,8 @@ Map also could be used for cache purposes::
 
    class Cache(Connection, redisext.hashmap.Map):
        SERIALIZER = redisext.serializer.Pickle
+
+use-case example for cache::
 
    >>> cache = Cache('hash')
    >>> cache.put({'result': 'of', 'cpu intensive': 'calculations'})
