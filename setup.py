@@ -6,7 +6,7 @@ except ImportError:
 setup(
     name='redisext',
     packages=['redisext', 'redisext.backend', 'redisext.models'],
-    version='1.1.2',
+    version='1.1.3',
     description='Data models for Redis',
     author='Andrey Gubarev',
     author_email='mylokin@me.com',
