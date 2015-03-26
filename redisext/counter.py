@@ -10,6 +10,8 @@ Example of unread messages counter::
    class Unread(Connection, redisext.counter.Counter):
        SERIALIZER = redisext.serializer.Numeric
 
+could be used like::
+
    >>> unread = Unread('messages')
    >>> unread.get()  # key does not exist
    >>> unread.incr()
