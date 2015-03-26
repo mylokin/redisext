@@ -1,16 +1,9 @@
 '''
 HashMap
-^^^^^^^
-
-.. autoclass:: HashMap
-   :members:
-
-Map
-^^^
+-------
 
 .. autoclass:: Map
    :members:
-
 '''
 from __future__ import absolute_import
 
@@ -39,12 +32,12 @@ class Map(redisext.models.abc.Model):
         value = self.encode(value)
         return self.connect_to_master().set(self.key, value)
 
-    def incr(self, amount=1):
-        value = self.connect_to_master().incr(self.key, amount)
+    def incr(self, value=1):
+        value = self.connect_to_master().incr(self.key, value)
         return self.decode(value)
 
-    def decr(self, amount=1):
-        value = self.connect_to_master().decr(self.key, amount)
+    def decr(self, value=1):
+        value = self.connect_to_master().decr(self.key, value)
         return self.decode(value)
 
     def remove(self):
