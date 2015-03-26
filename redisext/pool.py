@@ -24,7 +24,7 @@ class Pool(redisext.models.abc.Model):
 
     def push(self, item):
         item = self.encode(item)
-        return self.connect_to_master().sadd(self.key, item)
+        return bool(self.connect_to_master().sadd(self.key, item))
 
 
 class SortedSet(redisext.models.abc.Model):
