@@ -59,8 +59,5 @@ Abstract Model
 
 .. automodule:: redisext.key
 
-Backend
--------
-
 .. automodule:: redisext.backend
 '''
