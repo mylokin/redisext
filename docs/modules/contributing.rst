@@ -31,6 +31,7 @@ Pre-requirements:
 * Parallels Desktop VM
 * Vagrant
 * Docker
+* Ansible
 
 To get running redis instance you need to execute::
 
