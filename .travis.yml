@@ -9,3 +9,4 @@ services:
   - redis-server
 sudo: false
 script: make test
+after_success: coveralls
