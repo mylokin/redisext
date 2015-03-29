@@ -1,5 +1,5 @@
-Data Models
-===========
+Examples
+========
 
 Counter
 -------
