@@ -112,13 +112,12 @@ and it's as simple as looks::
 
 Here is priority queue as well :class:`redisext.queue.PriorityQueue`.
 
-PS
---
+.. note::
 
-Imports section is intentionaly skiped, but for ther order it is listed below::
+   Imports section is intentionaly skiped, but for the order it is listed below::
 
-   import redisext.backend.redis
-   import redisext.serializer
+      import redisext.backend.redis
+      import redisext.serializer
 
-   class Connection(redisext.backend.redis.Connection):
-      MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
+      class Connection(redisext.backend.redis.Connection):
+          MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
