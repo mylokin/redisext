@@ -4,6 +4,9 @@ Redisext
 .. image:: https://travis-ci.org/mylokin/redisext.svg?branch=master
    :target: https://travis-ci.org/mylokin/redisext
 
+.. image:: https://coveralls.io/repos/mylokin/redisext/badge.svg?branch=master
+   :target: https://coveralls.io/r/mylokin/redisext?branch=master
+
 .. image:: https://pypip.in/wheel/redisext/badge.svg
    :target: https://pypi.python.org/pypi/redisext/
 
