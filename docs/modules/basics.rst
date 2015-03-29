@@ -54,3 +54,19 @@ Example::
    1
    >>> Visitors('site').get()
    1
+
+Serializers
+-----------
+
+Redisext have to solve data encoding problem, because Redis support only simple
+data structures. Thus you can use your model without serializer and work using
+data types supported by you client library or you can use one of this:
+
+* :class:`redisext.serializer.JSON`
+* :class:`redisext.serializer.String`
+* :class:`redisext.serializer.Numeric`
+* :class:`redisext.serializer.Pickle`
+
+.. note::
+
+   Yes, there is no float type - because you don't need it.
