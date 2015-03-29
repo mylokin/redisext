@@ -22,7 +22,7 @@ default. But this could be re-configured using REDIS_HOST, REDIS_PORT and
 REDIS_DB environment variables.
 
 Docker Image
-------------
+^^^^^^^^^^^^
 
 Simpliest way to get Redis server instance localy is to use Docker image::
 
@@ -32,13 +32,13 @@ Simpliest way to get Redis server instance localy is to use Docker image::
    This command is bound to ``make redis``.
 
 Docker
-------
+^^^^^^
 
 Check out official Docker documentation available
 `here <https://docs.docker.com>`_ to get Docker.
 
 OSX Redis Recipe
-----------------
+^^^^^^^^^^^^^^^^
 
 Redisext contains helpers to get your Redis server instance as fast as possible.
 Pre-requirements:
