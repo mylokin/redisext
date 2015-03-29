@@ -12,7 +12,7 @@ counters, pools and stacks. Redisext could be treated as a ORM for Redis.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    modules/tutorial
    modules/basics
