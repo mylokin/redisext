@@ -10,6 +10,7 @@ approve approve pull requests. Code should be merged to master branch only by
 head maintainer and package owner.
 
 Workflow:
+
 #. Fork ``https://github.com/mylokin/redisext``
 #. Make your changes
 #. Make sure tests are passed succesfuly
@@ -20,7 +21,7 @@ Test Suite
 ----------
 
 Redisext uses 100% tests coverage to provide better quality code. Thus tests
-running is essential. To run test use::
+running is essential. To run tests use::
 
    make tests
 
