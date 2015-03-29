@@ -75,3 +75,23 @@ Example::
    1
    >>> Visitors('site').get()
    1
+
+Multi-threaded Environment
+--------------------------
+
+Redisext do support work in multithreaded environments:
+
+* Redis operations are atomic, you don't need any kind of locks
+* Redis connections are handled using 3rt-party client library,
+thus you need to checkout this library implementation design
+* Most of classes doesn't contains any state, except of ``KEY``, thus if you're
+using ``KEY`` attribute please be careful.
+
+Python Versions
+---------------
+
+Redisext supports:
+
+* 2.7.9
+* 3.4.2
+* Pypy 2.5.0
