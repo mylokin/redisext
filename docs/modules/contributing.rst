@@ -31,12 +31,12 @@ Pre-requirements:
 * Parallels Desktop VM
 * Vagrant
 
-To get running redis instance you need to execute:
+To get running redis instance you need to execute::
 
-# cd etc & make
-# make
+   cd etc & make
+   make
 
-.. note:
+.. note::
 
    Redisext recipe is only initial setup procedure for Redis server.
    Don't forget to shutdown your container and VM afterall.
