@@ -59,7 +59,7 @@ Serializers
 -----------
 
 Redisext have to solve data encoding problem, because Redis support only simple
-data structures. Thus you can use your model without serializer and work using
+data structures. You can use your model without serializer and work using
 data types supported by you client library or you can use one of this:
 
 * :class:`redisext.serializer.JSON`
