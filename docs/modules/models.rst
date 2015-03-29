@@ -112,8 +112,8 @@ and it's as simple as looks::
 
 Here is priority queue as well :class:`redisext.queue.PriorityQueue`.
 
-Missed Imports
---------------
+PS
+--
 
 Imports section is intentionaly skiped, but for ther order it is listed below::
 
