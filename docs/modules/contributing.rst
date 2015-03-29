@@ -15,7 +15,7 @@ Simpliest way to get Redis server instance localy is to use Docker image::
    docker run --name redisext -p 6379:6379 -d redis
 
 .. note::
-   This command bound to ``make redis``.
+   This command is bound to ``make redis``.
 
 Docker
 ------
