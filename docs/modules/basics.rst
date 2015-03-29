@@ -35,6 +35,27 @@ widely used and well known data structures. Redisext consist of:
 This is only part of all awailable models. Some of them undocumented, so you
 need to go and check out `sources <https://github.com/mylokin/redisext>`_.
 
+Serializers
+-----------
+
+Redisext have to solve data encoding problem, because Redis support only simple
+data structures. You can use your model without serializer and work using
+data types supported by you client library or you can use one of this:
+
+* :class:`redisext.serializer.JSON`
+* :class:`redisext.serializer.String`
+* :class:`redisext.serializer.Numeric`
+* :class:`redisext.serializer.Pickle`
+
+Pick a serializer and pass set it as ``SERIALIZER`` attribute value::
+
+   class Visitors(Connection, redisext.counter.Counter):
+       SERIALIZER = redisext.serializer.Numeric
+
+.. note::
+
+   Yes, there is no float type - because you don't need it :)
+
 Keys
 ----
 
@@ -54,19 +75,3 @@ Example::
    1
    >>> Visitors('site').get()
    1
-
-Serializers
------------
-
-Redisext have to solve data encoding problem, because Redis support only simple
-data structures. You can use your model without serializer and work using
-data types supported by you client library or you can use one of this:
-
-* :class:`redisext.serializer.JSON`
-* :class:`redisext.serializer.String`
-* :class:`redisext.serializer.Numeric`
-* :class:`redisext.serializer.Pickle`
-
-.. note::
-
-   Yes, there is no float type - because you don't need it.
