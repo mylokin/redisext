@@ -30,11 +30,20 @@ Pre-requirements:
 
 * Parallels Desktop VM
 * Vagrant
+* Docker
 
 To get running redis instance you need to execute::
 
    cd etc & make
+   export DOCKER_HOST="tcp://.."  # you'll see address after prev. command execution
    make
+
+Those commands will do this:
+
+#. Run Ubuntu 14.04 VM using Vagrant/Parallels
+#. Install Docker onto this VM
+#. Export Docker server port
+#. Run Redis image using Docker and expose 6379 port to localhost
 
 .. note::
 
