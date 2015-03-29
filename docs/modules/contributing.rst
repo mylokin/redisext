@@ -1,11 +1,25 @@
 Contributing
 ============
 
-Environment Setup
------------------
+Test Suite
+----------
 
-Redisext requires installed `Redis <http://redis.io>`_ server.
-Tests are using Redis located on *6379* port and db *0*.
+Redisext uses 100% tests coverage to provide better quality code. Thus tests
+running is essential. To run test use::
+
+   make tests
+
+but it requires Redis server. How to get working redis server on your machine
+read below.
+
+
+Test Suite Environment Setup
+----------------------------
+
+Redisext test suite requires installed `Redis <http://redis.io>`_ server.
+Tests are using Redis located on *6379* port on *localhost* and db *0* by
+default. But this could be re-configured using REDIS_HOST, REDIS_PORT and
+REDIS_DB environment variables.
 
 Docker Image
 ------------
@@ -20,7 +34,8 @@ Simpliest way to get Redis server instance localy is to use Docker image::
 Docker
 ------
 
-Check out official Docker documentation available `here <https://docs.docker.com>`_ to get Docker.
+Check out official Docker documentation available
+`here <https://docs.docker.com>`_ to get Docker.
 
 OSX Redis Recipe
 ----------------
@@ -36,7 +51,7 @@ Pre-requirements:
 To get running redis instance you need to execute::
 
    cd etc & make
-   export DOCKER_HOST="tcp://.."  # you'll see address after prev. command execution
+   export DOCKER_HOST="tcp://.."  # you'll see address after prev. command
    make
 
 Those commands will do this:
