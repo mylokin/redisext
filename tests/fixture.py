@@ -1,12 +1,17 @@
 from __future__ import absolute_import
 
+import os
 import unittest
 
 import redisext.backend.redis
 
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+REDIS_DB = os.getenv('REDIS_DB', 0)
+
 
 class Connection(redisext.backend.redis.Connection):
-    MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
+    MASTER = {'host': REDIS_HOST, 'port': REDIS_PORT, 'db': REDIS_DB}
 
 
 class TestCase(unittest.TestCase):
