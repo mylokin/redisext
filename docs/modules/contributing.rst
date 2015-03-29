@@ -9,6 +9,13 @@ Contributing to Redisext should be done using pull request for
 approve approve pull requests. Code should be merged to master branch only by
 head maintainer and package owner.
 
+Workflow:
+#. Fork ``https://github.com/mylokin/redisext``
+#. Make your changes
+#. Make sure tests are passed succesfuly
+#. Pull Request
+
+
 Test Suite
 ----------
 
