@@ -17,6 +17,7 @@ counters, pools and stacks. Redisext could be treated as a ORM for Redis.
    modules/tutorial
    modules/models
    modules/api
+   modules/contributing
 
 
 Indices and tables
