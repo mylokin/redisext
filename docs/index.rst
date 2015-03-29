@@ -15,6 +15,7 @@ counters, pools and stacks. Redisext could be treated as a ORM for Redis.
    :maxdepth: 2
 
    modules/tutorial
+   modules/basics
    modules/models
    modules/api
    modules/contributing
