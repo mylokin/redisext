@@ -17,9 +17,9 @@ Test Suite Environment Setup
 ----------------------------
 
 Redisext test suite requires installed `Redis <http://redis.io>`_ server.
-Tests are using Redis located on *6379* port on *localhost* and db *0* by
-default. But this could be re-configured using REDIS_HOST, REDIS_PORT and
-REDIS_DB environment variables.
+Tests are using Redis located on ``6379`` port on ``localhost`` and db ``0`` by
+default. But this could be re-configured using ``REDIS_HOST``, ``REDIS_PORT``
+and REDIS_DB environment variables.
 
 Docker Image
 ^^^^^^^^^^^^
@@ -50,7 +50,7 @@ Pre-requirements:
 
 To get running redis instance you need to execute::
 
-   cd etc & make
+   cd etc && make
    export DOCKER_HOST="tcp://.."  # you'll see address after prev. command
    make
 
