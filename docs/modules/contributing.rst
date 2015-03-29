@@ -1,6 +1,14 @@
 Contributing
 ============
 
+Contributing Policy
+-------------------
+
+Contributing to Redisext should be done using pull request for
+``https://github.com/mylokin/redisext``. There are core maintainers that will
+approve approve pull requests. Code should be merged to master branch only by
+head maintainer and package owner.
+
 Test Suite
 ----------
 
@@ -13,8 +21,8 @@ but it requires Redis server. How to get working redis server on your machine
 read below.
 
 
-Test Suite Environment Setup
-----------------------------
+Environment Setup
+^^^^^^^^^^^^^^^^^
 
 Redisext test suite requires installed `Redis <http://redis.io>`_ server.
 Tests are using Redis located on ``6379`` port on ``localhost`` and db ``0`` by
@@ -67,3 +75,9 @@ Those commands will do this:
    Don't forget to shutdown your container and VM afterall.
    Also this approach requires basic knoledge about Vagrant and Docker
    (for example how to restart your container or VM).
+
+
+License
+-------
+
+Redisext is distributed under MIT license.
