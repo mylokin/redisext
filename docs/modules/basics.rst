@@ -19,6 +19,18 @@ Redisext do some connections management. It's using most simple model:
 Thus bare Redisext couldn't be used for high-loaded applications, but there is
 easy way to solve this problem - your own client with connections pool support :)
 
+Master/Slave
+------------
+
+Redisext supports master/slave servers configurations::
+
+      class Connection(redisext.backend.redis.Connection):
+          MASTER = {'host': '192.168.1.1', 'port': 6379, 'db': 0}
+          SLAVE = {'host': '192.168.1.2', 'port': 6379, 'db': 0}
+
+Master server is used for write operations, slave for read operations. There is no way
+to force read from master if slave is provided.
+
 Model
 -----
 
