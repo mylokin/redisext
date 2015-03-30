@@ -6,7 +6,7 @@ Contributing Policy
 
 Contributing to Redisext should be done using pull request for
 ``https://github.com/mylokin/redisext``. There are core maintainers that will
-approve approve pull requests. Code should be merged to master branch only by
+approve pull requests. Code should be merged to master branch only by
 head maintainer and package owner.
 
 Workflow:
