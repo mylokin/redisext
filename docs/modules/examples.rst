@@ -123,7 +123,7 @@ Lock
 Lock based on Redis keys existence::
 
    class TaskLock(redisext.lock.Lock):
-       CONNECTION = fixture.Connection
+       CONNECTION = Connection
 
 usage::
 
