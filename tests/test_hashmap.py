@@ -18,19 +18,19 @@ class HashMapTestCase(fixture.TestCase):
 
     def test_single_put_into_hashmap(self):
         key, value = 'key1', 'value1'
-        self.hashmap.put(key, value)
+        self.hashmap.set(key, value)
         self.assertEqual(self.hashmap.get(key), value)
 
     def test_single_removal_from_hashmap(self):
         key, value = 'key1', 'value1'
-        self.hashmap.put(key, value)
+        self.hashmap.set(key, value)
         self.hashmap.remove(key)
         self.assertIsNone(self.hashmap.get(key))
 
     def test_multiple_put_and_removal_into_hashmap(self):
         data = {'key1': 'value1', 'key2': 'value2'}
         for key, value in data.items():
-            self.hashmap.put(key, value)
+            self.hashmap.set(key, value)
             self.assertEqual(self.hashmap.get(key), value)
             self.hashmap.remove(key)
             self.assertIsNone(self.hashmap.get(key))
@@ -48,12 +48,12 @@ class MapTestCase(fixture.TestCase):
     def test_multiple_map_set(self):
         data = {'map_key1': 'value1', 'map_key2': 'value2'}
         for key, value in data.items():
-            Map(key).put(value)
+            Map(key).set(value)
             self.assertEqual(Map(key).get(), value)
 
     def test_empty_map(self):
         key, value = 'key1', 'value1'
-        Map(key).put(value)
+        Map(key).set(value)
         Map(key).remove()
         self.assertIsNone(Map(key).get())
 

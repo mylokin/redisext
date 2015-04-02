@@ -8,7 +8,7 @@ class HashMap(redisext.models.abc.Model):
         value = self.connect_to_slave().hget(self.key, hash_key)
         return self.decode(value)
 
-    def put(self, hash_key, value):
+    def set(self, hash_key, value):
         value = self.encode(value)
         return self.connect_to_master().hset(self.key, hash_key, value)
 
@@ -25,7 +25,7 @@ class Map(redisext.models.abc.Model):
         value = self.connect_to_slave().get(self.key)
         return self.decode(value)
 
-    def put(self, value):
+    def set(self, value):
         ''' Store value into map.
 
         :param value:
