@@ -66,3 +66,11 @@ class Map(redisext.models.abc.Model):
         :rtype: bool
         '''
         return bool(self.connect_to_master().delete(self.key))
+
+    def exists(self):
+        ''' Returns status if key exists or not
+
+        :returns: existence
+        :rtype: bool
+        '''
+        return bool(self.connect_to_master().exists(self.key))

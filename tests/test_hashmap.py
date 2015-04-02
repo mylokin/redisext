@@ -57,6 +57,14 @@ class MapTestCase(fixture.TestCase):
         Map(key).remove()
         self.assertIsNone(Map(key).get())
 
+    def test_exists_method_for_failure(self):
+        self.assertFalse(Map('key').exists())
+
+    def test_exists_method_for_success(self):
+        key = 'key'
+        Map(key).set('')
+        self.assertTrue(Map(key).exists())
+
 
 class NumericMap(redisext.hashmap.Map):
     CONNECTION = fixture.Connection

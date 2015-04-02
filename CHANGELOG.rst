@@ -7,6 +7,7 @@ Changelog
 +++++
 
 - Replace ``put`` in redisext.hashmap with more common ``set``
+- Add ``exists`` method to Map
 
 1.2.0 (2015-04-03)
 ++++++++++++++++++

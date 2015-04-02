@@ -13,6 +13,9 @@ class IClient(object):
     def delete(self, key):
         return self._redis.delete(key)
 
+    def exists(self, key):
+        return self._redis.exists(key)
+
     def get(self, key):
         return self._redis.get(key)
 
