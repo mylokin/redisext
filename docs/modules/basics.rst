@@ -61,7 +61,8 @@ data types supported by you client library or you can use one of this:
 
 Pick a serializer and pass set it as ``SERIALIZER`` attribute value::
 
-   class Visitors(Connection, redisext.counter.Counter):
+   class Visitors(redisext.counter.Counter):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Numeric
 
 .. note::
@@ -75,7 +76,8 @@ Mostly models suited to work with Redis keys, but sometimes is much more
 convenient to predefine key and work with model that behaves like a singleton.
 To do that use ``KEY`` attribute::
 
-   class Visitors(Connection, redisext.counter.Counter):
+   class Visitors(redisext.counter.Counter):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Numeric
 
    class SiteVisitors(Visitors):

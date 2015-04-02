@@ -6,7 +6,8 @@ Counter
 
 Example of unread messages counter::
 
-   class Unread(Connection, redisext.counter.Counter):
+   class Unread(redisext.counter.Counter):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Numeric
 
 could be used like::
@@ -26,7 +27,8 @@ HashMap
 Map could be used for simple and direct key's value manipulations.
 For example storing Twitter's username::
 
-   class TwitterUsername(Connection, redisext.hashmap.Map):
+   class TwitterUsername(redisext.hashmap.Map):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.String
 
 and use-case::
@@ -38,7 +40,8 @@ and use-case::
 
 Map also could be used for cache purposes::
 
-   class Cache(Connection, redisext.hashmap.Map):
+   class Cache(redisext.hashmap.Map):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Pickle
 
 use-case example for cache::
@@ -59,7 +62,8 @@ Pool
 
 The simpliest example of pool usage is token pool::
 
-   class TokenPool(Connection, redisext.pool.Pool):
+   class TokenPool(redisext.pool.Pool):
+      CONNECTION = Connection
       SERIALIZER = redisext.serializer.String
 
 and this pool could be used like::
@@ -88,7 +92,8 @@ Queue
 
 Right, task queue::
 
-   class Task(Connection, redisext.queue.Queue):
+   class Task(redisext.queue.Queue):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Pickle
 
 and it's as simple as looks::
