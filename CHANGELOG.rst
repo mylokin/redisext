@@ -6,8 +6,9 @@ Changelog
 1.2.1
 +++++
 
-- Replace ``put`` in redisext.hashmap with more common ``set``
-- Add ``exists`` method to Map
+- Rename ``put`` to ``set`` in redisext.hashmap
+- Method ``exists`` method to Map
+- Connections re-use
 
 1.2.0 (2015-04-03)
 ++++++++++++++++++

@@ -11,12 +11,20 @@ layer that helps to separate Redisext algorithms from Redis client library.
 Connection
 ----------
 
-Redisext do some connections management. It's using most simple model:
+Redisext do some connections management. It's using lazy connections by default:
 
-#. Open connection on command execution
+#. Open connection on first command execution
+#. Re-use connection for next commands execution
+#. Close connection on object destruction
+
+Thus try to avoid instances of models on module level or class level, overwise
+you'll get bunch of persistend connections. This behavior could be altered
+using ``CONNECTION_REUSE`` attribute:
+
+#. Open connection on first command execution
 #. Close connection after command execution
 
-Thus bare Redisext couldn't be used for high-loaded applications, but there is
+This behavior couldn't be used for high-loaded applications, but there is
 easy way to solve this problem - your own client with connections pool support :)
 
 Master/Slave
