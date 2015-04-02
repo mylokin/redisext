@@ -34,5 +34,6 @@ Data model example:
        MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
 
 
-   class SeriousStats(Connection, redisext.hashmap.Map):
+   class SeriousStats(redisext.hashmap.Map):
+       CONNECTION = Connection
        SERIALIZER = redisext.serializer.Numeric
