@@ -6,7 +6,8 @@ import redisext.serializer
 from . import fixture
 
 
-class HashMap(fixture.Connection, redisext.hashmap.HashMap):
+class HashMap(redisext.hashmap.HashMap):
+    CONNECTION = fixture.Connection
     KEY = 'key'
     SERIALIZER = redisext.serializer.Pickle
 
@@ -38,7 +39,8 @@ class HashMapTestCase(fixture.TestCase):
         self.assertIsNone(self.hashmap.get('non-esixsted'))
 
 
-class Map(fixture.Connection, redisext.hashmap.Map):
+class Map(redisext.hashmap.Map):
+    CONNECTION = fixture.Connection
     SERIALIZER = redisext.serializer.Pickle
 
 
@@ -56,7 +58,8 @@ class MapTestCase(fixture.TestCase):
         self.assertIsNone(Map(key).get())
 
 
-class NumericMap(fixture.Connection, redisext.hashmap.Map):
+class NumericMap(redisext.hashmap.Map):
+    CONNECTION = fixture.Connection
     SERIALIZER = redisext.serializer.Numeric
     KEY = 'key1'
 

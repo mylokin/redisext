@@ -7,11 +7,10 @@ import redisext.serializer
 from . import fixture
 
 
-class ExpireCounter(fixture.Connection,
-                    redisext.counter.Counter,
-                    redisext.key.Expire,
-                    redisext.serializer.Numeric):
+class ExpireCounter(redisext.counter.Counter, redisext.key.Expire):
     EXPIRE = 60
+    CONNECTION = fixture.Connection
+    SERIALIZER = redisext.serializer.Numeric
 
 
 class ExpireCounterTestCase(fixture.TestCase):
@@ -28,11 +27,9 @@ class ExpireCounterTestCase(fixture.TestCase):
         self.assertEqual(self.counter.ttl(), -1)
 
 
-class UnspecifiedExpireCounter(fixture.Connection,
-                               redisext.counter.Counter,
-                               redisext.key.Expire,
-                               redisext.serializer.Numeric):
-    pass
+class UnspecifiedExpireCounter(redisext.counter.Counter, redisext.key.Expire):
+    CONNECTION = fixture.Connection
+    SERIALIZER = redisext.serializer.Numeric
 
 
 class UnspecifiedExpireCounterTestCase(fixture.TestCase):

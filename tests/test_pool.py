@@ -6,7 +6,8 @@ import redisext.serializer
 from . import fixture
 
 
-class Pool(fixture.Connection, redisext.pool.Pool):
+class Pool(redisext.pool.Pool):
+    CONNECTION = fixture.Connection
     KEY = 'key'
     SERIALIZER = redisext.serializer.Pickle
 
@@ -32,7 +33,8 @@ class EmptyPoolTestCase(fixture.TestCase):
         self.assertIsNone(Pool().pop())
 
 
-class KeyPicklePool(fixture.Connection, redisext.pool.Pool):
+class KeyPicklePool(redisext.pool.Pool):
+    CONNECTION = fixture.Connection
     SERIALIZER = redisext.serializer.Pickle
 
 
@@ -40,7 +42,8 @@ class KeyPoolTestCase(fixture.KeyTestCase):
     STORAGE = KeyPicklePool
 
 
-class SortedSet(fixture.Connection, redisext.pool.SortedSet):
+class SortedSet(redisext.pool.SortedSet):
+    CONNECTION = fixture.Connection
     KEY = 'key'
     SERIALIZER = redisext.serializer.Pickle
 

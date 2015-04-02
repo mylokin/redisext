@@ -15,7 +15,8 @@ class StackTestCase(fixture.TestCase):
             self.assertEqual(item, stack.pop())
 
 
-class RawStack(fixture.Connection, redisext.stack.Stack):
+class RawStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     KEY = 'raw_stack'
 
 
@@ -36,7 +37,8 @@ class RawStackTestCase(StackTestCase):
         self.assertIsNone(self.raw_stack.pop())
 
 
-class JSONStack(fixture.Connection, redisext.stack.Stack):
+class JSONStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     KEY = 'json_stack'
     SERIALIZER = redisext.serializer.JSON
 
@@ -53,7 +55,8 @@ class JsonStackTestCase(StackTestCase):
         self.assertIsNone(self.json_stack.pop())
 
 
-class StringStack(fixture.Connection, redisext.stack.Stack):
+class StringStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     KEY = 'string_stack'
     SERIALIZER = redisext.serializer.String
 
@@ -70,7 +73,8 @@ class StringStackTestCase(StackTestCase):
         self.assertIsNone(self.string_stack.pop())
 
 
-class DecimalStack(fixture.Connection, redisext.stack.Stack):
+class DecimalStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     KEY = 'decimal_stack'
     SERIALIZER = redisext.serializer.Numeric
 
@@ -87,7 +91,8 @@ class DecimalStackTestCase(StackTestCase):
         self.assertIsNone(self.decimal_stack.pop())
 
 
-class PickleStack(fixture.Connection, redisext.stack.Stack):
+class PickleStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     KEY = 'stack'
     SERIALIZER = redisext.serializer.Pickle
 
@@ -104,7 +109,8 @@ class PickleStackTestCase(StackTestCase):
         self.assertIsNone(self.pickle_stack.pop())
 
 
-class KeyPickleStack(fixture.Connection, redisext.stack.Stack):
+class KeyPickleStack(redisext.stack.Stack):
+    CONNECTION = fixture.Connection
     SERIALIZER = redisext.serializer.Pickle
 
 
