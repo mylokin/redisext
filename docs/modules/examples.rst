@@ -117,12 +117,30 @@ and it's as simple as looks::
 
 Here is priority queue as well :class:`redisext.queue.PriorityQueue`.
 
+Lock
+----
+
+Lock based on Redis keys existence::
+
+   class TaskLock(redisext.lock.Lock):
+       CONNECTION = fixture.Connection
+
+usage::
+
+   >>> TaskLock('task1').acquire()
+   True
+   >>> TaskLock('task1').acquire()
+   False
+   >>> TaskLock('task1').release()
+   True
+   >>> TaskLock('task1').release()
+   False
+
 .. note::
 
    Imports section is intentionaly skiped, but for the order it is listed below::
 
       import redisext.backend.redis
-      import redisext.serializer
 
       class Connection(redisext.backend.redis.Connection):
           MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}

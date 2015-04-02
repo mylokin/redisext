@@ -6,9 +6,10 @@ Changelog
 1.2.1
 +++++
 
-- Rename ``put`` to ``set`` in redisext.hashmap
-- Method ``exists`` method to Map
+- Rename ``put`` to ``set`` in ``redisext.hashmap``
+- Method ``exists`` method to ``Map``
 - Connections re-use
+- Add ``Lock``
 
 1.2.0 (2015-04-03)
 ++++++++++++++++++
