@@ -35,6 +35,16 @@ class Queue(redisext.models.abc.Model):
         '''
         return self.connect_to_master().llen(self.key)
 
+    def items(self):
+        '''
+        Get all queue items.
+
+        :returns: ordered list of items
+        :rtype: list
+        '''
+        items = self.connect_to_slave().lrange(self.key, 0, -1)
+        return [self.decode(i) for i in items]
+
 
 class PriorityQueue(redisext.models.abc.Model):
     def pop(self):

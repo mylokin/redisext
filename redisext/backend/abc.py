@@ -37,6 +37,9 @@ class IClient(object):
     def lpush(self, key, item):
         return self._redis.lpush(key, item)
 
+    def lrange(self, key, start, stop):
+        return self._redis.lrange(key, start, stop)
+
     def persist(self, key):
         return self._redis.persist(key)
 

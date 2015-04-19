@@ -38,6 +38,14 @@ class QueueTestCase(fixture.TestCase):
     def test_zero_size(self):
         self.assertEqual(self.queue.size(), 0)
 
+    def test_items(self):
+        self.queue.push(1)
+        self.queue.push(2)
+        self.assertEqual(self.queue.items(), [2, 1])
+
+    def test_empty_items(self):
+        self.assertEqual(self.queue.items(), [])
+
 
 class PriorityQueue(redisext.queue.PriorityQueue):
     CONNECTION = fixture.Connection
