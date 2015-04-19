@@ -26,6 +26,15 @@ class Queue(redisext.models.abc.Model):
         item = self.encode(item)
         return self.connect_to_master().lpush(self.key, item)
 
+    def size(self):
+        '''
+        Get queue size.
+
+        :returns: number of items in queue
+        :rtype: int
+        '''
+        return self.connect_to_master().llen(self.key)
+
 
 class PriorityQueue(redisext.models.abc.Model):
     def pop(self):

@@ -28,6 +28,9 @@ class IClient(object):
     def hset(self, key, hash_key, value):
         return self._redis.hset(key, hash_key, value)
 
+    def llen(self, key):
+        return self._redis.llen(key)
+
     def lpop(self, key):
         return self._redis.lpop(key)
 
