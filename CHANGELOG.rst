@@ -3,6 +3,12 @@
 Changelog
 ---------
 
+1.2.3
+++++++++++++++++++
+
+- Add ``items`` method to queue
+- Add ``ltrim`` method to abstract redis connection
+
 1.2.2 (2015-04-19)
 ++++++++++++++++++
 
