@@ -40,6 +40,9 @@ class IClient(object):
     def lrange(self, key, start, stop):
         return self._redis.lrange(key, start, stop)
 
+    def ltrim(self, key, start, stop):
+        return self._redis.ltrim(key, start, stop)
+
     def persist(self, key):
         return self._redis.persist(key)
 
