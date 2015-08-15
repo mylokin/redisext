@@ -40,6 +40,13 @@ class SortedSet(redisext.models.abc.Model):
 
         return [self.decode(e) for e in elements]
 
+    def members_by_score(self, min_score='-inf', max_score='+inf'):
+        elements = self.connect_to_slave().zrangebyscore(self.key, min_score, max_score, num=-1)
+        if not elements:
+            return elements
+
+        return [self.decode(e) for e in elements]
+
     def contains(self, element):
         element = self.encode(element)
         return self.connect_to_slave().zscore(self.key, element) is not None
