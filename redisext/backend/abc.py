@@ -88,6 +88,9 @@ class IClient(object):
     def zremrangebyrank(self, key, start, stop):
         return self._redis.zremrangebyrank(key, start, stop)
 
+    def zremrangebyscore(self, key, min_score, max_score):
+        return self._redis.zremrangebyscore(key, min_score, max_score)
+
     def zrevrange(self, key, start, stop):
         return self._redis.zrevrange(key, start, stop)
 

@@ -76,8 +76,13 @@ class SortedSetTestCase(fixture.TestCase):
         self.assertEqual(self.sortedset.members(), [])
 
     def test_sortedset_members_by_score(self):
-        expected_members = ['string2', 'string3']
-        self.assertEqual(self.sortedset.members_by_score(1, 2), expected_members)
+        expected = ['string2', 'string3']
+        self.assertEqual(self.sortedset.members_by_score(1, 2), expected)
+
+    def test_sortedset_clean_by_score(self):
+        self.sortedset.clean_by_score(0, 2)
+        expected = ['string4']
+        self.assertEqual(self.sortedset.members(), expected)
 
 
 class EmptySortedSetTestCase(fixture.TestCase):

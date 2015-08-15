@@ -56,3 +56,7 @@ class SortedSet(redisext.models.abc.Model):
 
     def clean(self):
         return bool(self.connect_to_master().delete(self.key))
+
+    def clean_by_score(self, min_score, max_score):
+        elements = self.connect_to_master().zremrangebyscore(self.key, min_score, max_score)
+        return bool(elements)
