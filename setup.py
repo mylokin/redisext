@@ -16,7 +16,7 @@ with open('redisext/__init__.py', 'r') as fd:
 
 setup(
     name='redisext',
-    packages=['redisext', 'redisext.backend', 'redisext.models'],
+    packages=['redisext', 'redisext.backend', 'redisext.models', 'redisext.packages'],
     package_data={'': ['LICENSE']},
     version=version,
     description='Data models for Redis',
