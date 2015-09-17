@@ -25,6 +25,8 @@ setup(
     url='https://github.com/mylokin/redisext',
     keywords=['redis', 'orm', 'models'],
     license='MIT',
+    platforms='any',
+    install_requires=['redis==2.10.3'],
     classifiers=(
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
