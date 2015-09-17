@@ -1,5 +1,9 @@
 from __future__ import absolute_import
 
+import redisext.backend.abc
+import redisext.backend.redis as redis
+import redisext.packages.dsnparse as dsnparse
+
 
 class Model(object):
     KEY = None
@@ -32,7 +36,16 @@ class Model(object):
     @property
     def connection(self):
         if not self._connection:
-            self._connection = self.CONNECTION
+            if isinstance(self.CONNECTION, str):
+                conn = dsnparse.parse(self.CONNECTION)
+
+                class Connection(redis.Connection):
+                    MASTER = {'host': conn.host, 'port': conn.port, 'db': conn.paths[0]}
+                self._connection = Connection
+            elif issubclass(self.CONNECTION, redisext.backend.abc.IConnection):
+                self._connection = self.CONNECTION
+            else:
+                raise ValueError
         return self._connection
 
     def connect_to_master(self):
