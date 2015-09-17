@@ -39,6 +39,18 @@ Redisext supports master/slave servers configurations::
 Master server is used for write operations, slave for read operations. There is no way
 to force read from master if slave is provided.
 
+DSN Support
+-----------
+
+Redisext supports DSN connection configuration::
+
+      class Counter(redisext.counter.Counter):
+          CONNECTION = 'redis://localhost:6379/0'
+
+.. note::
+
+   Redisext doesn't care about protocol for now :)
+
 Model
 -----
 
