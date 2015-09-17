@@ -9,6 +9,7 @@ class Model(object):
     def __init__(self, key=None):
         self.key = key or getattr(self, 'KEY', None)
 
+        self._connection = None
         self._master = None
         self._slave = None
 
@@ -28,16 +29,22 @@ class Model(object):
         else:
             return value
 
+    @property
+    def connection(self):
+        if not self._connection:
+            self._connection = self.CONNECTION
+        return self._connection
+
     def connect_to_master(self):
         if not self.CONNECTION_REUSE:
-            return self.CONNECTION.connect_to_master()
+            return self.connection.connect_to_master()
         if not self._master:
-            self._master = self.CONNECTION.connect_to_master()
+            self._master = self.connection.connect_to_master()
         return self._master
 
     def connect_to_slave(self):
         if not self.CONNECTION_REUSE:
-            return self.CONNECTION.connect_to_slave()
+            return self.connection.connect_to_slave()
         if not self._slave:
-            self._slave = self.CONNECTION.connect_to_slave()
+            self._slave = self.connection.connect_to_slave()
         return self._slave
