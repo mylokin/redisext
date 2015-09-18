@@ -58,6 +58,9 @@ class SortedSetTestCase(fixture.TestCase):
     def test_sortedset_multiple_add(self):
         self.assertEquals(self.sortedset.length(0, 3), 4)
 
+    def test_sortedset_multiple_rem(self):
+        self.assertTrue(self.sortedset.rem('string1'))
+
     def test_sortedset_element_availability(self):
         element, score = next(iter(self.data.items()))
         self.assertTrue(self.sortedset.contains(element))

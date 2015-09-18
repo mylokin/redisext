@@ -30,6 +30,10 @@ class SortedSet(redisext.models.abc.Model):
         element = self.encode(element)
         return bool(self.connect_to_master().zadd(self.key, score, element))
 
+    def rem(self, element):
+        element = self.encode(element)
+        return bool(self.connect_to_master().zrem(self.key, element))
+
     def length(self, start_score, end_score):
         return int(self.connect_to_slave().zcount(self.key, start_score, end_score))
 
