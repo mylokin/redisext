@@ -37,19 +37,25 @@ class SortedSet(redisext.models.abc.Model):
     def length(self, start_score, end_score):
         return int(self.connect_to_slave().zcount(self.key, start_score, end_score))
 
-    def members(self):
-        elements = self.connect_to_slave().zrevrange(self.key, 0, -1)
+    def members(self, with_scores=False):
+        elements = self.connect_to_slave().zrevrange(self.key, 0, -1, withscores=with_scores)
         if not elements:
             return elements
 
-        return [self.decode(e) for e in elements]
+        if with_scores:
+            return [(s, self.decode(e)) for e, s in elements]
+        else:
+            return [self.decode(e) for e in elements]
 
-    def members_by_score(self, min_score='-inf', max_score='+inf'):
-        elements = self.connect_to_slave().zrangebyscore(self.key, min_score, max_score, num=-1)
+    def members_by_score(self, min_score='-inf', max_score='+inf', with_scores=False):
+        elements = self.connect_to_slave().zrangebyscore(self.key, min_score, max_score, num=-1, withscores=with_scores)
         if not elements:
             return elements
 
-        return [self.decode(e) for e in elements]
+        if with_scores:
+            return [(s, self.decode(e)) for e, s in elements]
+        else:
+            return [self.decode(e) for e in elements]
 
     def contains(self, element):
         element = self.encode(element)

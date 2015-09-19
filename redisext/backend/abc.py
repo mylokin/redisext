@@ -70,13 +70,14 @@ class IClient(object):
     def decr(self, key, amount=1):
         return self._redis.decr(key, amount)
 
-    def zrangebyscore(self, key, min_score, max_score, start=0, num=1):
+    def zrangebyscore(self, key, min_score, max_score, start=0, num=1, withscores=False):
         return self._redis.zrangebyscore(
             key,
             min_score,
             max_score,
             start=start,
             num=num,
+            withscores=withscores,
         )
 
     def zrem(self, key, item):
@@ -91,8 +92,8 @@ class IClient(object):
     def zremrangebyscore(self, key, min_score, max_score):
         return self._redis.zremrangebyscore(key, min_score, max_score)
 
-    def zrevrange(self, key, start, stop):
-        return self._redis.zrevrange(key, start, stop)
+    def zrevrange(self, key, start, stop, withscores=False):
+        return self._redis.zrevrange(key, start, stop, withscores=withscores)
 
     def zscore(self, key, member):
         return self._redis.zscore(key, member)

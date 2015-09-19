@@ -69,6 +69,11 @@ class SortedSetTestCase(fixture.TestCase):
         expected_members = sorted(self.data.keys(), reverse=True)
         self.assertEqual(self.sortedset.members(), expected_members)
 
+    def test_sortedset_members_with_scores(self):
+        expected_members = sorted(self.data.items(), reverse=True)
+        expected_members = [(s, e) for e, s in expected_members]
+        self.assertEqual(self.sortedset.members(with_scores=True), expected_members)
+
     def test_sortedset_truncated_members(self):
         self.sortedset.truncate(2)
         truncated = sorted(self.data.keys(), reverse=True)[:-2]
@@ -81,6 +86,10 @@ class SortedSetTestCase(fixture.TestCase):
     def test_sortedset_members_by_score(self):
         expected = ['string2', 'string3']
         self.assertEqual(self.sortedset.members_by_score(1, 2), expected)
+
+    def test_sortedset_members_by_score_with_scores(self):
+        expected = [(1., 'string2'), (2., 'string3')]
+        self.assertEqual(self.sortedset.members_by_score(1, 2, with_scores=True), expected)
 
     def test_sortedset_clean_by_score(self):
         self.sortedset.clean_by_score(0, 2)
