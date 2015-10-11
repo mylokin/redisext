@@ -46,6 +46,9 @@ class IClient(object):
     def persist(self, key):
         return self._redis.persist(key)
 
+    def randomkey(self):
+        return self._redis.randomkey()
+
     def rpop(self, key):
         return self._redis.rpop(key)
 

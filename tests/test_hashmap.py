@@ -65,6 +65,11 @@ class MapTestCase(fixture.TestCase):
         Map(key).set('')
         self.assertTrue(Map(key).exists())
 
+    def test_random_key(self):
+        key = 'key'
+        Map(key).set('')
+        self.assertEqual(Map().connect_to_master().randomkey(), key)
+
 
 class NumericMap(redisext.hashmap.Map):
     CONNECTION = fixture.Connection
