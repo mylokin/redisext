@@ -1,13 +1,17 @@
 from __future__ import absolute_import
 
+import os
 import unittest
 
 import redisext.backend.abc
 import redisext.backend.redis
 
+REDIS_HOST = os.getenv('REDIS_HOST', 'localhost')
+REDIS_PORT = os.getenv('REDIS_PORT', 6379)
+
 
 class Connection(redisext.backend.abc.IConnection):
-    MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
+    MASTER = {'host': REDIS_HOST, 'port': REDIS_PORT, 'db': 0}
 
 
 class IConnectionTestCase(unittest.TestCase):
@@ -17,8 +21,8 @@ class IConnectionTestCase(unittest.TestCase):
 
 
 class ReplicatedConnection(redisext.backend.redis.Connection):
-    MASTER = {'host': 'localhost', 'port': 6379, 'db': 0}
-    SLAVE = {'host': 'localhost', 'port': 6379, 'db': 1}
+    MASTER = {'host': REDIS_HOST, 'port': REDIS_PORT, 'db': 0}
+    SLAVE = {'host': REDIS_HOST, 'port': REDIS_PORT, 'db': 1}
 
 
 class ReplicatedConnectionTestCase(unittest.TestCase):
