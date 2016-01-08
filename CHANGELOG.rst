@@ -3,7 +3,13 @@
 Changelog
 ---------
 
-1.3.6 (2016-01-08)
+1.3.8 (2016-01-08)
+++++++++++++++++++
+
+- Add ``contains`` to Pool
+- Fix major ``rename`` bug
+
+1.3.7 (2016-01-08)
 ++++++++++++++++++
 
 - Add ``rename`` to IClient

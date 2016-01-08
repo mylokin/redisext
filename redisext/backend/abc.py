@@ -70,6 +70,9 @@ class IClient(object):
     def smembers(self, key):
         return self._redis.smembers(key)
 
+    def sismember(self, key, member):
+        return self._redis.sismember(key, member)
+
     def ttl(self, key):
         return self._redis.ttl(key)
 

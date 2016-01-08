@@ -26,13 +26,24 @@ class Pool(redisext.models.abc.Model):
 
     def members(self):
         '''
-        List all pool members.
+        List all pool items.
+
+        :rtype: list
         '''
         elements = self.connect_to_slave().smembers(self.key)
         if not elements:
             return []
 
         return [self.decode(e) for e in elements]
+
+    def contains(self, item):
+        '''
+        Check if pool contains item
+
+        :rtype: bool
+        '''
+        item = self.encode(item)
+        return bool(self.connect_to_slave().sismember(self.key, item))
 
 
 class SortedSet(redisext.models.abc.Model):

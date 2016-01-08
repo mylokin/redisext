@@ -31,6 +31,12 @@ class PoolTestCase(fixture.TestCase):
         members = self.pool.members()
         self.assertTrue(all(m in members for m in self.data))
 
+    def test_pool_contains(self):
+        self.assertTrue(self.pool.contains(1))
+
+    def test_pool_containse_fail(self):
+        self.assertFalse(self.pool.contains(6))
+
 
 class EmptyPoolTestCase(fixture.TestCase):
     def test_empty_pool(self):
