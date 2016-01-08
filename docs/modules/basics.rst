@@ -110,6 +110,21 @@ Example::
    >>> Visitors('site').get()
    1
 
+Pipeline
+--------
+
+Redisext has pipelines support. Pipelines provided using native(driver-level)
+pipelines API.
+
+Example::
+
+   >>> class Visitors(redisext.counter.Counter):
+   ...    CONNECTION = Connection
+   ...    SERIALIZER = redisext.serializer.Numeric
+   ...
+   >>> Visitors().connect_to_master().pipeline()
+   StrictPipeline<ConnectionPool<Connection<host=192.168.99.100,port=6379,db=0>>>
+
 Multi-threaded Environment
 --------------------------
 
