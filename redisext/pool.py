@@ -24,6 +24,16 @@ class Pool(redisext.models.abc.Model):
         item = self.encode(item)
         return bool(self.connect_to_master().sadd(self.key, item))
 
+    def members(self):
+        '''
+        List all pool members.
+        '''
+        elements = self.connect_to_slave().smembers(self.key)
+        if not elements:
+            return []
+
+        return [self.decode(e) for e in elements]
+
 
 class SortedSet(redisext.models.abc.Model):
     def add(self, element, score):

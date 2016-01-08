@@ -27,10 +27,17 @@ class PoolTestCase(fixture.TestCase):
         for x in range(self.length):
             self.assertIn(self.pool.pop(), self.data)
 
+    def test_pool_members(self):
+        members = self.pool.members()
+        self.assertTrue(all(m in members for m in self.data))
+
 
 class EmptyPoolTestCase(fixture.TestCase):
     def test_empty_pool(self):
         self.assertIsNone(Pool().pop())
+
+    def test_empty_pool_members(self):
+        self.assertEqual(Pool().members(), [])
 
 
 class KeyPicklePool(redisext.pool.Pool):

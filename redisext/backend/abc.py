@@ -61,6 +61,9 @@ class IClient(object):
     def spop(self, key):
         return self._redis.spop(key)
 
+    def smembers(self, key):
+        return self._redis.smembers(key)
+
     def ttl(self, key):
         return self._redis.ttl(key)
 
