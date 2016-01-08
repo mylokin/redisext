@@ -34,7 +34,7 @@ class PoolTestCase(fixture.TestCase):
     def test_pool_contains(self):
         self.assertTrue(self.pool.contains(1))
 
-    def test_pool_containse_fail(self):
+    def test_pool_contains_fail(self):
         self.assertFalse(self.pool.contains(6))
 
 
