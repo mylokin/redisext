@@ -47,7 +47,7 @@ class IClient(object):
         return self._redis.persist(key)
 
     def randomkey(self):
-        return str(self._redis.randomkey())
+        return self._redis.randomkey().decode()
 
     def rpop(self, key):
         return self._redis.rpop(key)
