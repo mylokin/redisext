@@ -52,6 +52,9 @@ class IClient(object):
     def randomkey(self):
         return self._redis.randomkey().decode()
 
+    def rename(self, key, newkey):
+        return self._redis.rename(key, newkey)
+
     def rpop(self, key):
         return self._redis.rpop(key)
 

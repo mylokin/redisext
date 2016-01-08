@@ -6,6 +6,12 @@ Changelog
 1.3.6 (2016-01-08)
 ++++++++++++++++++
 
+- Add ``rename`` to IClient
+- Add ``redisext.key.Key`` mixin with ``rename`` method
+
+1.3.6 (2016-01-08)
+++++++++++++++++++
+
 - Add ``pipeline`` to IClient
 
 1.3.5 (2016-01-08)

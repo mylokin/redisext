@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import redisext.hashmap
+import redisext.key
 import redisext.serializer
 
 from . import fixture
@@ -39,7 +40,7 @@ class HashMapTestCase(fixture.TestCase):
         self.assertIsNone(self.hashmap.get('non-esixsted'))
 
 
-class Map(redisext.hashmap.Map):
+class Map(redisext.hashmap.Map, redisext.key.Key):
     CONNECTION = fixture.Connection
     SERIALIZER = redisext.serializer.Pickle
 
@@ -69,6 +70,11 @@ class MapTestCase(fixture.TestCase):
         key = 'key'
         Map(key).set('')
         self.assertEqual(Map().connect_to_master().randomkey(), key)
+
+    def test_rename_key(self):
+        Map('key').set('_')
+        Map('key').rename('key1')
+        self.assertEqual(Map('key1').get(), '_')
 
 
 class NumericMap(redisext.hashmap.Map):

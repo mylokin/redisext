@@ -17,3 +17,8 @@ class Expire(object):
 
     def persist(self):
         return self.connect_to_master().persist(self.key)
+
+
+class Key(object):
+    def rename(self, newkey):
+        return self.connect_to_master().rename(self.key, newkey)
