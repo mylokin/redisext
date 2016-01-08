@@ -72,9 +72,16 @@ class MapTestCase(fixture.TestCase):
         self.assertEqual(Map().connect_to_master().randomkey(), key)
 
     def test_rename_key(self):
-        Map('key').set('_')
-        Map('key').rename('key1')
-        self.assertEqual(Map('key1').get(), '_')
+        key, newkey, value = 'key', 'key1', '_'
+        Map(key).set(value)
+        self.assertTrue(Map(key).rename(newkey))
+        self.assertEqual(Map(newkey).get(), value)
+
+    def test_rename_unexisted_key(self):
+        key, newkey, value = 'key', 'key1', '_'
+        Map(newkey).set(value)
+        self.assertFalse(Map(key).rename(newkey))
+        self.assertEqual(Map(newkey).get(), value)
 
 
 class NumericMap(redisext.hashmap.Map):

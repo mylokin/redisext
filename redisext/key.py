@@ -21,4 +21,8 @@ class Expire(object):
 
 class Key(object):
     def rename(self, newkey):
-        return self.connect_to_master().rename(self.key, newkey)
+        if self.connect_to_master().exists(self.key):
+            self.connect_to_master().rename(self.key, newkey)
+            return True
+        else:
+            return False
