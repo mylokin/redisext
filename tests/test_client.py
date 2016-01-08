@@ -33,3 +33,9 @@ class ReplicatedConnectionTestCase(unittest.TestCase):
     def test_slave(self):
         ReplicatedConnection.connect_to_master().set('key', 'value')
         self.assertIsNone(ReplicatedConnection.connect_to_slave().get('key'))
+
+    def test_pipeline(self):
+        self.assertIsNotNone(ReplicatedConnection.connect_to_master().pipeline())
+
+    def test_pipeline_transaction(self):
+        self.assertIsNotNone(ReplicatedConnection.connect_to_master().pipeline(transaction=False))

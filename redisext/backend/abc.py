@@ -46,6 +46,9 @@ class IClient(object):
     def persist(self, key):
         return self._redis.persist(key)
 
+    def pipeline(self, transaction=False):
+        return self._redis.pipeline(transaction=transaction)
+
     def randomkey(self):
         return self._redis.randomkey().decode()
 
