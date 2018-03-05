@@ -7,10 +7,10 @@ Redisext
 .. image:: https://coveralls.io/repos/mylokin/redisext/badge.svg?branch=master
    :target: https://coveralls.io/r/mylokin/redisext?branch=master
 
-.. image:: https://pypip.in/wheel/redisext/badge.svg
+.. image:: https://img.shields.io/pypi/wheel/redisext.svg
    :target: https://pypi.python.org/pypi/redisext/
 
-.. image:: https://pypip.in/d/redisext/badge.png
+.. image:: https://img.shields.io/pypi/dm/redisext.svg
    :target: https://crate.io/packages/redisext/
 
 Documentation
