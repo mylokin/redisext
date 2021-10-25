@@ -5,7 +5,7 @@ test:
 redis:
 	docker run --name redisext -p 6379:6379 -d redis
 
-publish: test docs
+publish: test
 	python setup.py sdist bdist_wheel upload
 
 clean:
