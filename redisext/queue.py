@@ -56,4 +56,5 @@ class PriorityQueue(redisext.models.abc.Model):
 
     def push(self, item, priority):
         item = self.encode(item)
-        return self.connect_to_master().zadd(self.key, int(priority), item)
+        data = {item: int(priority)}
+        return self.connect_to_master().zadd(self.key, data)

@@ -7,7 +7,7 @@ from . import fixture
 
 class Lock(redisext.lock.Lock):
     CONNECTION = fixture.Connection
-    Key = 'lock'
+    KEY = 'lock'
 
 
 class HashMapTestCase(fixture.TestCase):

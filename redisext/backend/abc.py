@@ -76,8 +76,8 @@ class IClient(object):
     def ttl(self, key):
         return self._redis.ttl(key)
 
-    def zadd(self, key, *args, **kwargs):
-        return self._redis.zadd(key, *args, **kwargs)
+    def zadd(self, key, mapping, *args, **kwargs):
+        return self._redis.zadd(key, mapping, *args, **kwargs)
 
     def incr(self, key, amount=1):
         return self._redis.incr(key, amount)

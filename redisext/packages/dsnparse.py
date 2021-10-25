@@ -12,7 +12,7 @@ else:
 
 
 def parse(dsn, **defaults):
-    assert re.match('^\S+://\S+', dsn), '{} is invalid, only full dsn urls (scheme://host...) allowed'.format(dsn)
+    assert re.match(r'^\S+://\S+', dsn), '{} is invalid, only full dsn urls (scheme://host...) allowed'.format(dsn)
 
     first_colon = dsn.find(':')
     scheme = dsn[0:first_colon]

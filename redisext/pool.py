@@ -49,7 +49,8 @@ class Pool(redisext.models.abc.Model):
 class SortedSet(redisext.models.abc.Model):
     def add(self, element, score):
         element = self.encode(element)
-        return bool(self.connect_to_master().zadd(self.key, score, element))
+        data = {element: score}
+        return bool(self.connect_to_master().zadd(self.key, data))
 
     def rem(self, element):
         element = self.encode(element)

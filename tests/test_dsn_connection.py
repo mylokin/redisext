@@ -12,6 +12,7 @@ REDIS_DSN = 'redis://{}:{}/{}'.format(
 
 
 class Counter(redisext.counter.Counter):
+    KEY = 'testkey'
     CONNECTION = REDIS_DSN
     SERIALIZER = redisext.serializer.Numeric
 
